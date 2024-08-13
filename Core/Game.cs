@@ -20,6 +20,12 @@ class Game
 	{
 		Input = Console.ReadLine() ?? "";
 	}
+	public string AskInput(string str)
+	{
+		Console.Write(str);
+		string input = Console.ReadLine() ?? "";
+		return input;
+	}
 
 	public void Run()
 	{
@@ -69,33 +75,62 @@ class Game
 				
 				break;
 			
-			case "debug_add":
+			case "use":
 				{
-					Console.Write("ItemID: ");
-					string input = Console.ReadLine();
-					
-					ItemID itemID;
-					try
+					// Show Inventory
+					Console.WriteLine($"You have");
+
+					foreach (var _item in Controller.Inventory)
 					{
-						itemID = (ItemID)Enum.Parse(typeof(ItemID), input);
+						Console.WriteLine($"\t{_item.Id}{(_item.Amount > 1 ? " " + _item.AmountString : "")}");
 					}
-					catch(Exception e)
+
+					string input = AskInput("ItemID: ");
+
+					// Get ItemID
+					ItemID itemID = Item.GetIDFromString(input);
+
+					if (itemID == ItemID.Null)
 					{
-						Console.WriteLine(e);
+						Console.WriteLine($"There's no {input}");
 						return;
 					}
 
-					Item item;
-					switch (itemID)
+					// Get Item
+					Item? item = Controller.Inventory.Find(x => x.Id == itemID);
+
+					if (item == null)
 					{
-						case ItemID.Apple:
-							item = new Apple();
-							break;
-						default:
-							return;
+						Console.WriteLine($"You don't have {input}");
+						return;
 					}
 
+					item.Use(Controller);
+				}
+				break;
+			
+			case "debug_add":
+				{
+					Console.Write("ItemID: ");
+					string input = Console.ReadLine() ?? "";
+					
+					ItemID itemID = Item.GetIDFromString(input);
+					Item? item = Item.CreateFromID(itemID);
+
+					if (item == null)
+					{
+						return;
+					}
+					
 					Controller.Add(item);
+				}
+				break;
+
+			case "debug_set_health":
+				{
+					Console.WriteLine($"Current Health: {Controller.Health}/{Controller.HealthMax}");
+					int input = Convert.ToInt32(AskInput("Health: "));
+					Controller.Health = input;
 				}
 				break;
 		}
