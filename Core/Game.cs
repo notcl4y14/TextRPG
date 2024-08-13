@@ -1,4 +1,5 @@
 using Content.Entities;
+using Content.Items;
 
 namespace Core;
 
@@ -53,6 +54,49 @@ class Game
 			case "stats":
 				Console.WriteLine("Stats");
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
+				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
+				break;
+			
+			case "inv":
+			case "invent":
+			case "inventory":
+				Console.WriteLine($"Inventory [{Controller.Inventory.Count}/{Controller.InventoryCapacity}]");
+
+				foreach (var item in Controller.Inventory)
+				{
+					Console.WriteLine($"\t{item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
+				}
+				
+				break;
+			
+			case "debug_add":
+				{
+					Console.Write("ItemID: ");
+					string input = Console.ReadLine();
+					
+					ItemID itemID;
+					try
+					{
+						itemID = (ItemID)Enum.Parse(typeof(ItemID), input);
+					}
+					catch(Exception e)
+					{
+						Console.WriteLine(e);
+						return;
+					}
+
+					Item item;
+					switch (itemID)
+					{
+						case ItemID.Apple:
+							item = new Apple();
+							break;
+						default:
+							return;
+					}
+
+					Controller.Add(item);
+				}
 				break;
 		}
 	}
