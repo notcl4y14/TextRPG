@@ -106,6 +106,11 @@ class Game
 					}
 
 					item.Use(Controller);
+
+					if (item.Amount == 0)
+					{
+						Controller.RemoveWholeItem(itemID);
+					}
 				}
 				break;
 			

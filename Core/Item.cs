@@ -11,15 +11,22 @@ enum ItemID
 abstract class Item
 {
 	public ItemID Id;
-	public string Description;
+	public string Description = "";
 	public int Amount;
+	public bool DestroyOnUse = false;
 
 	public string AmountString
 	{
 		get => Amount != 1 ? $"x{Amount}" : "";
 	}
 
-	public abstract void Use(Entity user);
+	public virtual void Use(Entity user)
+	{
+		if (DestroyOnUse)
+		{
+			Amount--;
+		}
+	}
 
 	public static Item? CreateFromID(ItemID ID)
 	{
@@ -40,7 +47,7 @@ abstract class Item
 		{
 			itemID = (ItemID)Enum.Parse(typeof(ItemID), str);
 		}
-		catch (Exception e)
+		catch
 		{
 			return ItemID.Null;
 		}
