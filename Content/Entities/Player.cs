@@ -9,5 +9,6 @@ class Player : Entity
 		Id = EntityID.Player;
 		Health = 125;
 		HealthMax = 125;
+		InventoryCapacity = 25;
 	}
 }
