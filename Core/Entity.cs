@@ -23,7 +23,8 @@ class Entity
 
 	public int HealthPercent
 	{
-		get => Health / HealthMax * 100;
+		// https://stackoverflow.com/a/704710/22146374
+		get => (int)((float)Health / HealthMax * 100);
 	}
 
 	public void Heal(uint delta)
