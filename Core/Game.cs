@@ -26,6 +26,12 @@ class Game
 		string input = Console.ReadLine() ?? "";
 		return input;
 	}
+	public ItemID AskInput_ItemID()
+	{
+		string input = AskInput("ItemID: ");
+		ItemID itemID = Item.GetIDFromString(input);
+		return itemID;
+	}
 
 	public void Run()
 	{
@@ -105,7 +111,7 @@ class Game
 						return;
 					}
 
-					item.Use(Controller);
+					item.Use(Controller, Controller);
 
 					if (item.Amount == 0)
 					{
@@ -116,14 +122,14 @@ class Game
 			
 			case "debug_add":
 				{
-					Console.Write("ItemID: ");
-					string input = Console.ReadLine() ?? "";
+					string input = AskInput("ItemID: ");
 					
 					ItemID itemID = Item.GetIDFromString(input);
 					Item? item = Item.CreateFromID(itemID);
 
 					if (item == null)
 					{
+						Console.WriteLine($"There's no ItemID {input}");
 						return;
 					}
 					

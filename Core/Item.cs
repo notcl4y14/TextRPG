@@ -5,7 +5,8 @@ namespace Core;
 enum ItemID
 {
 	Null,
-	Apple
+	Apple,
+	Sword
 }
 
 abstract class Item
@@ -20,7 +21,7 @@ abstract class Item
 		get => Amount != 1 ? $"x{Amount}" : "";
 	}
 
-	public virtual void Use(Entity user)
+	public virtual void Use(Entity user, Entity target)
 	{
 		if (DestroyOnUse)
 		{
@@ -34,6 +35,8 @@ abstract class Item
 		{
 			case ItemID.Apple:
 				return new Apple();
+			case ItemID.Sword:
+				return new Sword();
 			default:
 				return null;
 		}

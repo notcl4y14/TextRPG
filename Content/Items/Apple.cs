@@ -12,9 +12,9 @@ class Apple : Item
 		DestroyOnUse = true;
 	}
 	
-	public override void Use(Entity user)
+	public override void Use(Entity user, Entity target)
 	{
-		base.Use(user);
-		user.Heal(10);
+		base.Use(user, target);
+		target.Heal(10);
 	}
 }

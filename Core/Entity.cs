@@ -104,6 +104,6 @@ class Entity
 			return;
 		}
 
-		item.Use(this);
+		item.Use(this, this);
 	}
 }
