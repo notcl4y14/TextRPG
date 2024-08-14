@@ -119,7 +119,29 @@ class Game
 					}
 				}
 				break;
-			
+
+			case "info":
+				{
+					string input = AskInput("ItemID: ");
+
+					ItemID itemID = Item.GetIDFromString(input);
+					Item? item = Item.CreateFromID(itemID);
+
+					if (item == null)
+					{
+						Console.WriteLine($"There's no ItemID {input}");
+						return;
+					}
+
+					item.LoadStats();
+
+					Console.WriteLine(item);
+					Console.WriteLine("Description: " + item.Description);
+					Console.WriteLine("Stats:");
+					Console.WriteLine(item.GetStats());
+				}
+				break;
+
 			case "debug_add":
 				{
 					string input = AskInput("ItemID: ");

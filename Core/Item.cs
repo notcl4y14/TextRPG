@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Content.Items;
 
 namespace Core;
@@ -14,6 +15,7 @@ abstract class Item
 	public ItemID Id;
 	public string Description = "";
 	public int Amount;
+	public Dictionary<string, string> Stats = [];
 
 	public string AmountString
 	{
@@ -22,9 +24,23 @@ abstract class Item
 
 	public abstract void Use(Entity user, Entity target);
 
+	public abstract void LoadStats();
+
 	public void RemoveOne()
 	{
 		Amount--;
+	}
+
+	public string GetStats()
+	{
+		string statsString = "";
+
+		foreach (var entry in Stats)
+		{
+			statsString += $"{entry.Key}: {entry.Value}\n";
+		}
+
+		return statsString;
 	}
 
 	public static Item? CreateFromID(ItemID ID)

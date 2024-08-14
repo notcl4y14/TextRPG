@@ -9,6 +9,13 @@ class Weapon : Item
 	public int CritDamage;
 	public int CritChance;
 
+	public override void LoadStats()
+	{
+		Stats.Add("Damage", "" + Damage);
+		Stats.Add("Crit Damage", "" + CritDamage);
+		Stats.Add("Crit Chance", "1/" + CritChance);
+	}
+
 	private int GetRandomDamage()
 	{
 		Random random = new Random();
