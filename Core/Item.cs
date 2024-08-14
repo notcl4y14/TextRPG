@@ -14,19 +14,17 @@ abstract class Item
 	public ItemID Id;
 	public string Description = "";
 	public int Amount;
-	public bool DestroyOnUse = false;
 
 	public string AmountString
 	{
 		get => Amount != 1 ? $"x{Amount}" : "";
 	}
 
-	public virtual void Use(Entity user, Entity target)
+	public abstract void Use(Entity user, Entity target);
+
+	public void RemoveOne()
 	{
-		if (DestroyOnUse)
-		{
-			Amount--;
-		}
+		Amount--;
 	}
 
 	public static Item? CreateFromID(ItemID ID)
