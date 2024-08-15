@@ -64,7 +64,7 @@ class Game
 				break;
 
 			case "stats":
-				Console.WriteLine("Stats");
+				Console.WriteLine("Stats:");
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
 				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
 				break;
@@ -72,11 +72,11 @@ class Game
 			case "inv":
 			case "invent":
 			case "inventory":
-				Console.WriteLine($"Inventory [{Controller.Inventory.Count}/{Controller.InventoryCapacity}]");
+				Console.WriteLine($"Inventory [{Controller.Inventory.Count}/{Controller.InventoryCapacity}]:");
 
 				foreach (var item in Controller.Inventory)
 				{
-					Console.WriteLine($"\t{item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
+					Console.WriteLine($"\t- {item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
 				}
 				
 				break;
@@ -84,11 +84,11 @@ class Game
 			case "use":
 				{
 					// Show Inventory
-					Console.WriteLine($"You have");
+					Console.WriteLine($"You have:");
 
 					foreach (var _item in Controller.Inventory)
 					{
-						Console.WriteLine($"\t{_item.Id}{(_item.Amount > 1 ? " " + _item.AmountString : "")}");
+						Console.WriteLine($"\t- {_item.Id}{(_item.Amount > 1 ? " " + _item.AmountString : "")}");
 					}
 
 					string input = AskInput("ItemID: ");
