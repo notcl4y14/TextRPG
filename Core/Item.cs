@@ -39,29 +39,21 @@ abstract class Item
 		Amount--;
 	}
 
-	public string GetStats()
+	public string GetStats(string prefix = "")
 	{
 		string statsString = "";
 
 		foreach (var entry in Stats)
 		{
-			statsString += $"{entry.Key}: {entry.Value}\n";
+			statsString += $"{prefix}{entry.Key}: {entry.Value}";
+
+			if (entry.Key != Stats.Last().Key)
+			{
+				statsString += "\n";
+			}
 		}
 
 		return statsString;
-	}
-
-	public static Item? CreateFromID(ItemID ID)
-	{
-		switch (ID)
-		{
-			case ItemID.Apple:
-				return new Apple();
-			case ItemID.Sword:
-				return new Sword();
-			default:
-				return null;
-		}
 	}
 
 	public static ItemID GetIDFromString(string str)

@@ -41,8 +41,8 @@ class Info : Command
 		}
 
 		Console.WriteLine(item.Name);
-		Console.WriteLine("Description: " + item.Description);
-		Console.WriteLine("Stats:");
-		Console.WriteLine(item.GetStats());
+		Console.WriteLine("\tDescription: " + item.Description);
+		Console.WriteLine("\tStats:");
+		Console.WriteLine(item.GetStats("\t\t"));
 	}
 }
