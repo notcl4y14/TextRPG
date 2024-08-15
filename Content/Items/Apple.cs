@@ -8,7 +8,7 @@ class Apple : Food
 	public Apple()
 	{
 		Id = ItemID.Apple;
-		Amount = 1;
+		Name = "Apple";
 		Description = "Heals 10 HP";
 		HealPower = 10;
 	}

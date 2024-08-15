@@ -1,3 +1,5 @@
 ﻿using Core;
 
-new Game().Run();
+var game = new Game();
+game.Load();
+game.Run();

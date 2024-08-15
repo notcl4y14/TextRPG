@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using Content.Items;
 
 namespace Core;
@@ -13,8 +12,9 @@ enum ItemID
 abstract class Item
 {
 	public ItemID Id;
+	public int Amount = 1;
+	public string Name = "";
 	public string Description = "";
-	public int Amount;
 	public Dictionary<string, string> Stats = [];
 
 	public string AmountString
@@ -22,9 +22,17 @@ abstract class Item
 		get => Amount != 1 ? $"x{Amount}" : "";
 	}
 
-	public abstract void Use(Entity user, Entity target);
+	// Library functions
+	public Item Load()
+	{
+		LoadStats();
+		return this;
+	}
 
 	public abstract void LoadStats();
+
+	// Misc.
+	public abstract void Use(Entity user, Entity target);
 
 	public void RemoveOne()
 	{

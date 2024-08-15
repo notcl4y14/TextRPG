@@ -1,3 +1,5 @@
+using Common;
+using Content.Commands;
 using Content.Entities;
 using Content.Items;
 
@@ -6,33 +8,41 @@ namespace Core;
 class Game
 {
 	bool IsRunning;
-	string Input;
 	Entity Controller;
 
 	public Game()
 	{
-		Input = "";
 		IsRunning = false;
 		Controller = new Player();
 	}
 
-	public void GetInput()
+	// Input
+	public string GetInput()
 	{
-		Input = Console.ReadLine() ?? "";
+		return Console.ReadLine() ?? "";
 	}
-	public string AskInput(string str)
+	
+	public static string AskInput(string str)
 	{
 		Console.Write(str);
 		string input = Console.ReadLine() ?? "";
 		return input;
 	}
-	public ItemID AskInput_ItemID()
+
+	// Init
+	public void Load()
 	{
-		string input = AskInput("ItemID: ");
-		ItemID itemID = Item.GetIDFromString(input);
-		return itemID;
+		ItemLibrary.Register(ItemID.Apple, new Apple().Load());
+		ItemLibrary.Register(ItemID.Sword, new Sword().Load());
+
+		CommandLibrary.Register("inventory", new Inventory().Load());
+		CommandLibrary.Register("use", new Use().Load());
+		CommandLibrary.Register("info", new Info().Load());
+		CommandLibrary.Register("debug_add", new DebugAdd().Load());
+		CommandLibrary.Register("debug_set_health", new DebugSetHealth().Load());
 	}
 
+	// Main
 	public void Run()
 	{
 		IsRunning = true;
@@ -45,14 +55,15 @@ class Game
 		while (IsRunning)
 		{
 			Console.Write("> ");
-			GetInput();
-			CheckCommand();
+			string input = GetInput();
+			CommandInput command = CommandInput.FromString(input);
+			CheckCommand(command);
 		}
 	}
 
-	public void CheckCommand()
+	public void CheckCommand(CommandInput command)
 	{
-		switch (Input.ToLower())
+		switch (command.Name.ToLower())
 		{
 			case "exit":
 			case "quit":
@@ -69,102 +80,10 @@ class Game
 				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
 				break;
 			
-			case "inv":
-			case "invent":
-			case "inventory":
-				Console.WriteLine($"Inventory [{Controller.Inventory.Count}/{Controller.InventoryCapacity}]:");
-
-				foreach (var item in Controller.Inventory)
-				{
-					Console.WriteLine($"\t- {item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
-				}
-				
-				break;
-			
-			case "use":
-				{
-					// Show Inventory
-					Console.WriteLine($"You have:");
-
-					foreach (var _item in Controller.Inventory)
-					{
-						Console.WriteLine($"\t- {_item.Id}{(_item.Amount > 1 ? " " + _item.AmountString : "")}");
-					}
-
-					string input = AskInput("ItemID: ");
-
-					// Get ItemID
-					ItemID itemID = Item.GetIDFromString(input);
-
-					if (itemID == ItemID.Null)
-					{
-						Console.WriteLine($"There's no {input}");
-						return;
-					}
-
-					// Get Item
-					Item? item = Controller.Inventory.Find(x => x.Id == itemID);
-
-					if (item == null)
-					{
-						Console.WriteLine($"You don't have {input}");
-						return;
-					}
-
-					item.Use(Controller, Controller);
-
-					if (item.Amount == 0)
-					{
-						Controller.RemoveWholeItem(itemID);
-					}
-				}
-				break;
-
-			case "info":
-				{
-					string input = AskInput("ItemID: ");
-
-					ItemID itemID = Item.GetIDFromString(input);
-					Item? item = Item.CreateFromID(itemID);
-
-					if (item == null)
-					{
-						Console.WriteLine($"There's no ItemID {input}");
-						return;
-					}
-
-					item.LoadStats();
-
-					Console.WriteLine(item);
-					Console.WriteLine("Description: " + item.Description);
-					Console.WriteLine("Stats:");
-					Console.WriteLine(item.GetStats());
-				}
-				break;
-
-			case "debug_add":
-				{
-					string input = AskInput("ItemID: ");
-					
-					ItemID itemID = Item.GetIDFromString(input);
-					Item? item = Item.CreateFromID(itemID);
-
-					if (item == null)
-					{
-						Console.WriteLine($"There's no ItemID {input}");
-						return;
-					}
-					
-					Controller.Add(item);
-				}
-				break;
-
-			case "debug_set_health":
-				{
-					Console.WriteLine($"Current Health: {Controller.Health}/{Controller.HealthMax}");
-					int input = Convert.ToInt32(AskInput("Health: "));
-					Controller.Health = input;
-				}
+			default:
+				string name = command.Name.ToLower();
+				string[] args = command.Arguments.ToArray();
+				CommandLibrary.GetFromID(name)?.Run(args, Controller);
 				break;
 		}
 	}

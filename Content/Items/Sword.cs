@@ -8,7 +8,7 @@ class Sword : Weapon
 	public Sword()
 	{
 		Id = ItemID.Sword;
-		Amount = 1;
+		Name = "Sword";
 		Description = "Deals 10 Damage";
 		Damage = 10;
 		CritDamage = 20;
