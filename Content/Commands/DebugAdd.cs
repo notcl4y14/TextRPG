@@ -40,6 +40,13 @@ class DebugAdd : Command
 			return;
 		}
 
+		if (entity.Inventory.Count >= entity.InventoryCapacity)
+		{
+			Console.WriteLine("Inventory is full!");
+			return;
+		}
+
+		Console.WriteLine($"Successfully added {itemName}!");
 		entity.Add(item);
 	}
 }
