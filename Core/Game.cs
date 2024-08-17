@@ -7,26 +7,15 @@ namespace Core;
 
 class Game
 {
+	private static Game Instance;
 	bool IsRunning;
-	private static Entity Controller;
+	Entity Controller;
 
 	public Game()
 	{
 		IsRunning = false;
 		Controller = new Player();
-	}
-
-	// Input
-	public string GetInput()
-	{
-		return Console.ReadLine() ?? "";
-	}
-	
-	public static string AskInput(string str)
-	{
-		Console.Write(str);
-		string input = Console.ReadLine() ?? "";
-		return input;
+		Instance = this;
 	}
 
 	// Misc.
@@ -36,17 +25,16 @@ class Game
 
 		if (!SaveState.IsOnSave)
 		{
-			Console.WriteLine("You haven't made any save");
-			string _input = AskConfirm("Choose another save? (Y/n)\n");
+			bool chooseSave = Log.AskConfirm("Choose another save? (Y/n)\n");
 
-			if (_input.ToUpper() == "Y")
+			if (chooseSave)
 			{
-				string fileName = AskInput("Filename: ");
-				Controller = SaveState.Load(fileName);
+				string fileName = Log.AskInput("Filename: ");
+				Instance.Controller = SaveState.Load(fileName);
 			}
-			else if (_input.ToUpper() == "N")
+			else
 			{
-				Environment.Exit(0);
+				Exit();
 			}
 
 			return;
@@ -56,38 +44,25 @@ class Game
 		
 		Console.WriteLine("Continue from last save? (Y/n)");
 		Console.WriteLine($"\n\tHealth: {entity.Health}/{entity.HealthMax}");
-		Console.WriteLine($"\tInventory: [{entity.Inventory.Count}/{entity.InventoryCapacity}]");
-
-		foreach (var item in entity.Inventory)
-		{
-			Console.WriteLine($"\t\t- {item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")}");
-		}
+		Log.Inventory(Instance.Controller.Inventory, Instance.Controller.InventoryCapacity, "\t");
 
 		Console.WriteLine("\nNOTE: If you choose \"n\", the game will quit");
 
-		string input = AskConfirm("Continue from last save? (Y/n)\n");
+		bool continueSave = Log.AskConfirm("Continue from last save? (Y/n)\n");
 
-		if (input.ToUpper() == "Y")
+		if (continueSave)
 		{
-			Controller = SaveState.Load(SaveState.FileName);
+			Instance.Controller = SaveState.Load(SaveState.FileName);
 		}
-		else if (input.ToUpper() == "N")
+		else
 		{
-			Environment.Exit(0);
+			Exit();
 		}
 	}
 
-	public static string AskConfirm(string str)
+	public static void Exit()
 	{
-		Console.Write(str);
-		string input = Console.ReadLine();
-
-		if (input.ToUpper() != "Y" && input.ToUpper() != "N")
-		{
-			return AskConfirm(str);
-		}
-
-		return input;
+		Environment.Exit(0);
 	}
 
 	// Init
@@ -121,7 +96,7 @@ class Game
 		while (IsRunning)
 		{
 			Console.Write("> ");
-			string input = GetInput();
+			string input = Log.ReadLine();
 			CommandInput command = CommandInput.FromString(input);
 			CheckCommand(command);
 		}

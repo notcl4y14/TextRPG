@@ -19,7 +19,7 @@ class Info : Command
 
 		if (arguments.Length == 0)
 		{
-			string input = Game.AskInput("ItemID: ");
+			string input = Log.AskInput("ItemID: ");
 			itemName = input;
 
 			itemID = Item.GetIDFromString(input);

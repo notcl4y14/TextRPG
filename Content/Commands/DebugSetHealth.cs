@@ -14,7 +14,7 @@ class DebugSetHealth : Command
 	{
 		int health;
 		
-		if (args.Length == 0)
+		if (args.Length > 0)
 		{
 			string input_health = args[0];
 			health = Convert.ToInt32(input_health);
@@ -22,7 +22,7 @@ class DebugSetHealth : Command
 		else
 		{
 			Console.WriteLine($"Current Health: {entity.Health}/{entity.HealthMax}");
-			health = Convert.ToInt32(Game.AskInput("Health: "));
+			health = Convert.ToInt32(Log.AskInput("Health: "));
 		}
 		
 		entity.Health = health;

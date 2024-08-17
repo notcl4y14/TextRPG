@@ -12,11 +12,6 @@ class Inventory : Command
 
 	public override void Run(string[] arguments, ref Entity entity)
 	{
-		Console.WriteLine($"Inventory [{entity.Inventory.Count}/{entity.InventoryCapacity}]:");
-
-		foreach (var item in entity.Inventory)
-		{
-			Console.WriteLine($"\t- {item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
-		}
+		Log.Inventory(entity.Inventory, entity.InventoryCapacity);
 	}
 }

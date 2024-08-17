@@ -19,7 +19,7 @@ class DebugAdd : Command
 
 		if (args.Length == 0)
 		{
-			string input = Game.AskInput("ItemID: ");
+			string input = Log.AskInput("ItemID: ");
 			itemName = input;
 
 			itemID = Item.GetIDFromString(input);
@@ -40,7 +40,7 @@ class DebugAdd : Command
 			return;
 		}
 
-		if (entity.Inventory.Count >= entity.InventoryCapacity)
+		if (entity.IsInventoryFull())
 		{
 			Console.WriteLine("Inventory is full!");
 			return;

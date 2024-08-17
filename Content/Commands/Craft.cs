@@ -50,7 +50,7 @@ class Craft : Command
 		ListItemRecipes(entity);
 
 		// Choose Item
-		string itemName = Game.AskInput("ItemID: ");
+		string itemName = Log.AskInput("ItemID: ");
 		ItemID itemID = Item.GetIDFromString(itemName);
 
 		if (itemID == ItemID.Null)
