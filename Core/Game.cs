@@ -81,7 +81,32 @@ class Game
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
 				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
 				break;
-			
+
+			case "save":
+				if (command.Arguments.Count < 2)
+				{
+					Console.WriteLine("save [playername] [filename]");
+					break;
+				}
+
+				var playerName = command.Arguments[0];
+				var fileName = "./" + command.Arguments[1];
+
+				SaveState.Save(playerName, fileName, Controller);
+				Console.WriteLine("Saved successfully!");
+				break;
+
+			case "load":
+				if (command.Arguments.Count < 1)
+				{
+					Console.WriteLine("load [filename]");
+					break;
+				}
+
+				Controller = SaveState.Load("./" + command.Arguments[0]);
+				Console.WriteLine("Loaded successfully!");
+				break;
+
 			default:
 				string name = command.Name.ToLower();
 				string[] args = command.Arguments.ToArray();
