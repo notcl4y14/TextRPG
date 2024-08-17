@@ -13,7 +13,6 @@ class Entity
 	public int HealthMax;
 	public List<Item> Inventory = [];
 	public int InventoryCapacity;
-	public int InventoryCount;
 
 	// Health
 	public string HealthString
