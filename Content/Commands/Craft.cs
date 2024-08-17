@@ -44,7 +44,7 @@ class Craft : Command
 		}
 	}
 
-	public override void Run(string[] args, Entity entity)
+	public override void Run(string[] args, ref Entity entity)
 	{
 		// List all the available items to craft
 		ListItemRecipes(entity);

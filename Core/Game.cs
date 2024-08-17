@@ -87,7 +87,7 @@ class Game
 			default:
 				string name = command.Name.ToLower();
 				string[] args = command.Arguments.ToArray();
-				CommandLibrary.GetFromID(name)?.Run(args, Controller);
+				CommandLibrary.GetFromID(name)?.Run(args, ref Controller);
 				break;
 		}
 	}

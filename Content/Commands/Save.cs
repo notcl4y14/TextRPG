@@ -10,7 +10,7 @@ class Save : Command
 		Alias = [];
 	}
 
-	public override void Run(string[] args, Entity entity)
+	public override void Run(string[] args, ref Entity entity)
 	{
 		if (args.Length < 2)
 		{

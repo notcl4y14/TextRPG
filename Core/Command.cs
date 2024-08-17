@@ -20,5 +20,5 @@ abstract class Command
 		return Alias.Contains(match);
 	}
 
-	public abstract void Run(string[] args, Entity entity);
+	public abstract void Run(string[] args, ref Entity entity);
 }

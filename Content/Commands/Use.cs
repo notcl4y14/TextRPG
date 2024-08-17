@@ -10,7 +10,7 @@ class Use : Command
 		Alias = [];
 	}
 
-	public override void Run(string[] arguments, Entity entity)
+	public override void Run(string[] arguments, ref Entity entity)
 	{
 		Item? item;
 		ItemID itemID;

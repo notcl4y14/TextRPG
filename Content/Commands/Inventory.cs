@@ -10,7 +10,7 @@ class Inventory : Command
 		Alias = ["invent", "inv"];
 	}
 
-	public override void Run(string[] arguments, Entity entity)
+	public override void Run(string[] arguments, ref Entity entity)
 	{
 		Console.WriteLine($"Inventory [{entity.Inventory.Count}/{entity.InventoryCapacity}]:");
 
