@@ -41,6 +41,7 @@ class Game
 		CommandLibrary.Register("craft", new Craft().Load());
 		CommandLibrary.Register("debug_add", new DebugAdd().Load());
 		CommandLibrary.Register("debug_set_health", new DebugSetHealth().Load());
+		CommandLibrary.Register("debug_list_items", new DebugListItems().Load());
 	}
 
 	// Main
