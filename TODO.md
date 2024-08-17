@@ -2,9 +2,9 @@
 https://github.com/todomd/todo.md
 
 ### Todo
-- [ ] Implement Game Over
 
 ### In Progress
-- [ ] Implement Save States
 
 ### Done
+- [x] Implement Save States
+- [x] Implement Game Over

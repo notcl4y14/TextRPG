@@ -27,6 +27,11 @@ class Entity
 		get => (int)((float)Health / HealthMax * 100);
 	}
 
+	public virtual void OnDead()
+	{
+		return;
+	}
+
 	public void Heal(uint delta)
 	{
 		Health += (int)delta;
@@ -44,6 +49,7 @@ class Entity
 		if (Health < 0)
 		{
 			Health = 0;
+			OnDead();
 		}
 	}
 
