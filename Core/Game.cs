@@ -39,6 +39,8 @@ class Game
 		CommandLibrary.Register("use", new Use().Load());
 		CommandLibrary.Register("info", new Info().Load());
 		CommandLibrary.Register("craft", new Craft().Load());
+		CommandLibrary.Register("save", new Save().Load());
+		CommandLibrary.Register("load", new Load().Load());
 		CommandLibrary.Register("debug_add", new DebugAdd().Load());
 		CommandLibrary.Register("debug_set_health", new DebugSetHealth().Load());
 		CommandLibrary.Register("debug_list_items", new DebugListItems().Load());
@@ -80,31 +82,6 @@ class Game
 				Console.WriteLine("Stats:");
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
 				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
-				break;
-
-			case "save":
-				if (command.Arguments.Count < 2)
-				{
-					Console.WriteLine("save [playername] [filename]");
-					break;
-				}
-
-				var playerName = command.Arguments[0];
-				var fileName = "./" + command.Arguments[1];
-
-				SaveState.Save(playerName, fileName, Controller);
-				Console.WriteLine("Saved successfully!");
-				break;
-
-			case "load":
-				if (command.Arguments.Count < 1)
-				{
-					Console.WriteLine("load [filename]");
-					break;
-				}
-
-				Controller = SaveState.Load("./" + command.Arguments[0]);
-				Console.WriteLine("Loaded successfully!");
 				break;
 
 			default:
