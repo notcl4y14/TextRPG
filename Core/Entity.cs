@@ -53,7 +53,7 @@ class Entity
 		return Inventory.Count >= InventoryCapacity;
 	}
 	
-	public void Add(Item item, int count = 1)
+	public void AddItem(Item item, int count = 1)
 	{
 		if (Inventory.Count + 1 > InventoryCapacity)
 		{

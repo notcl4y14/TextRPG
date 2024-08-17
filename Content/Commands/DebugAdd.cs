@@ -47,6 +47,6 @@ class DebugAdd : Command
 		}
 
 		Console.WriteLine($"Successfully added {itemName}!");
-		entity.Add(item);
+		entity.AddItem(item);
 	}
 }

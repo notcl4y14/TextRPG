@@ -79,7 +79,7 @@ class Craft : Command
 			return;
 		}
 
-		entity.Add( ItemLibrary.GetFromID(recipe.ItemID) );
+		entity.AddItem( ItemLibrary.GetFromID(recipe.ItemID) );
 
 		// Remove Items from the inventory
 		foreach (var item in entity.Inventory)
