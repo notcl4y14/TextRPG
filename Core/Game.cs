@@ -68,30 +68,14 @@ class Game
 	// Init
 	public void Load()
 	{
-		ItemLibrary.Register(ItemID.Apple, new Apple().Load());
-		ItemLibrary.Register(ItemID.Sword, new Sword().Load());
-
-		CommandLibrary.Register("inventory", new Inventory().Load());
-		CommandLibrary.Register("use", new Use().Load());
-		CommandLibrary.Register("info", new Info().Load());
-		CommandLibrary.Register("craft", new Craft().Load());
-		CommandLibrary.Register("save", new Save().Load());
-		CommandLibrary.Register("load", new Load().Load());
-		CommandLibrary.Register("debug_add", new DebugAdd().Load());
-		CommandLibrary.Register("debug_set_health", new DebugSetHealth().Load());
-		CommandLibrary.Register("debug_list_items", new DebugListItems().Load());
-		CommandLibrary.Register("debug_check_save", new DebugCheckSave().Load());
+		LibraryLoader.LoadCommands();
+		LibraryLoader.LoadItems();
 	}
 
 	// Main
 	public void Run()
 	{
 		IsRunning = true;
-
-		Console.WriteLine(Controller);
-		Console.WriteLine(Controller.Id);
-		Console.WriteLine(Controller.HealthString);
-		Console.WriteLine(Controller.HealthPercent);
 
 		while (IsRunning)
 		{
