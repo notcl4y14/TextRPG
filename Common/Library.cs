@@ -4,6 +4,19 @@ namespace Common;
 
 class ItemLibrary : Library<ItemID, Item>;
 
+class CraftLibrary : Library<ItemID, CraftRecipe>
+{
+	public static CraftRecipe? GetRecipe(ItemID itemID)
+	{
+		if (!Registers.ContainsKey(itemID))
+		{
+			return null;
+		}
+		
+		return Registers[itemID];
+	}
+}
+
 class CommandLibrary : Library<string, Command>
 {
 	public static Dictionary<string, string[]> Alias = [];

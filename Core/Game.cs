@@ -38,6 +38,7 @@ class Game
 		CommandLibrary.Register("inventory", new Inventory().Load());
 		CommandLibrary.Register("use", new Use().Load());
 		CommandLibrary.Register("info", new Info().Load());
+		CommandLibrary.Register("craft", new Craft().Load());
 		CommandLibrary.Register("debug_add", new DebugAdd().Load());
 		CommandLibrary.Register("debug_set_health", new DebugSetHealth().Load());
 	}

@@ -48,6 +48,11 @@ class Entity
 	}
 
 	// Inventory
+	public bool IsInventoryFull()
+	{
+		return Inventory.Count >= InventoryCapacity;
+	}
+	
 	public void Add(Item item, int count = 1)
 	{
 		if (Inventory.Count + 1 > InventoryCapacity)

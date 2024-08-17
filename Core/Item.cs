@@ -25,11 +25,13 @@ abstract class Item
 	// Library functions
 	public Item Load()
 	{
+		LoadRecipe();
 		LoadStats();
 		return this;
 	}
 
-	public abstract void LoadStats();
+	public virtual void LoadRecipe() {}
+	public virtual void LoadStats() {}
 
 	// Misc.
 	public abstract void Use(Entity user, Entity target);
