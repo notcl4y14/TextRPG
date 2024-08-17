@@ -7,6 +7,11 @@ namespace Core;
 
 class SaveState
 {
+	public static string PlayerName;
+	public static string FileName;
+
+	public static bool IsOnSave => PlayerName != null || FileName != null;
+
 	private static List<Item> ParseInventory(KeyDataCollection inventory)
 	{
 		List<Item> result = [];
@@ -33,9 +38,12 @@ class SaveState
 	{
 		IniData data = new FileIniDataParser().ReadFile(file);
 
-		int health           = int.Parse(data["main"]["Health"]);
-		int healthMax        = int.Parse(data["main"]["HealthMax"]);
-		int invCapacity      = int.Parse(data["main"]["InventoryCapacity"]);
+		PlayerName = data["main"]["Name"];
+		FileName = file;
+
+		int health           = Convert.ToInt32(data["main"]["Health"]);
+		int healthMax        = Convert.ToInt32(data["main"]["HealthMax"]);
+		int invCapacity      = Convert.ToInt32(data["main"]["InventoryCapacity"]);
 		List<Item> inventory = ParseInventory(data["inventory"]);
 
         Player controller = new Player
@@ -52,6 +60,9 @@ class SaveState
 	public static void Save(string name, string file, Entity entity)
 	{
 		FileIniDataParser parser = new FileIniDataParser();
+
+		PlayerName = name;
+		FileName = file;
 
 		var data = new IniData();
 		data["main"]["Name"]              = name;
