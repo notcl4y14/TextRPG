@@ -3,7 +3,8 @@ namespace Core;
 enum EntityID
 {
 	Null,
-	Player
+	Player,
+	Slime
 }
 
 class Entity

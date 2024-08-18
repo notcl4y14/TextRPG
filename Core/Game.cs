@@ -10,11 +10,13 @@ class Game
 	private static Game Instance;
 	bool IsRunning;
 	Entity Controller;
+	Entity?[] Enemies;
 
 	public Game()
 	{
 		IsRunning = false;
 		Controller = new Player();
+		Enemies = new Entity[3];
 		Instance = this;
 	}
 
@@ -63,6 +65,20 @@ class Game
 	public static void Exit()
 	{
 		Environment.Exit(0);
+	}
+
+	// Enemies
+	public static void AddEnemy(Entity enemy, int index)
+	{
+		Instance.Enemies[index] = enemy;
+	}
+	public static void RemoveEnemy(int index)
+	{
+		Instance.Enemies[index] = null;
+	}
+	public static Entity? GetEnemy(int index)
+	{
+		return Instance.Enemies[index];
 	}
 
 	// Init
