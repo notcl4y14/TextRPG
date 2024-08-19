@@ -35,6 +35,27 @@ class LibraryLoader
 		}
 	}
 
+	public static void LoadEntities()
+	{
+		Type[] types = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "Content.Entities");
+
+		Console.WriteLine("Loading entities...");
+
+		foreach (var type in types)
+		{
+			Entity instance = Activator.CreateInstance(type) as Entity;
+
+			if (instance == null)
+			{
+				continue;
+			}
+
+			// instance.Load();
+
+			EntityLibrary.Register(instance.Id, instance);
+		}
+	}
+
 	public static void LoadCommands()
 	{
 		Type[] types = GetTypesInNamespace(Assembly.GetExecutingAssembly(), "Content.Commands");

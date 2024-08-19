@@ -17,6 +17,8 @@ class CraftLibrary : Library<ItemID, CraftRecipe>
 	}
 }
 
+class EntityLibrary : Library<EntityID, Entity>;
+
 class CommandLibrary : Library<string, Command>
 {
 	public static Dictionary<string, string[]> Alias = [];
