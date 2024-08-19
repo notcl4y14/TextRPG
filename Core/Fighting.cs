@@ -87,7 +87,7 @@ class Fighting
 				continue;
 			}
 
-			(enemy as Slime).Move(Enemies.ToArray(), player);
+			(enemy as Enemy).Move(Enemies.ToArray(), player);
 		}
 
 		for (int i = 0; i < Enemies.Count; i++)
