@@ -12,22 +12,33 @@ class SaveState
 
 	public static bool IsOnSave => PlayerName != null || FileName != null;
 
+	private static Item? ParseItem(string id)
+	{
+		var itemID = Item.GetIDFromString(id);
+
+		if (itemID == ItemID.Null)
+		{
+			Console.WriteLine($"There's no ItemID {id}");
+			return null;
+		}
+
+		return ItemLibrary.GetFromID(itemID);
+	}
+
 	private static List<Item> ParseInventory(KeyDataCollection inventory)
 	{
 		List<Item> result = [];
 
 		foreach (var entry in inventory)
 		{
-			var itemID = Item.GetIDFromString(entry.KeyName);
+			var item = ParseItem(entry.KeyName);
 
-			if (itemID == ItemID.Null)
+			if (item == null)
 			{
-				Console.WriteLine($"There's no ItemID {entry.KeyName}");
 				continue;
 			}
 
-			var item = ItemLibrary.GetFromID(itemID);
-			item.Amount = int.Parse(entry.Value);
+			item.Amount = Convert.ToInt32(entry.Value);
 			result.Add(item);
 		}
 
@@ -43,6 +54,7 @@ class SaveState
 
 		int health           = Convert.ToInt32(data["main"]["Health"]);
 		int healthMax        = Convert.ToInt32(data["main"]["HealthMax"]);
+		Item? attackSlot     = ParseItem(data["main"]["AttackSlot"]);
 		int invCapacity      = Convert.ToInt32(data["main"]["InventoryCapacity"]);
 		List<Item> inventory = ParseInventory(data["inventory"]);
 
@@ -51,7 +63,8 @@ class SaveState
             Health = health,
             HealthMax = healthMax,
             InventoryCapacity = invCapacity,
-            Inventory = inventory
+            Inventory = inventory,
+			AttackSlot = attackSlot
         };
 
         return controller;
@@ -68,6 +81,7 @@ class SaveState
 		data["main"]["Name"]              = name;
 		data["main"]["Health"]            = entity.Health.ToString();
 		data["main"]["HealthMax"]         = entity.HealthMax.ToString();
+		data["main"]["AttackSlot"]        = entity.AttackSlot.Id.ToString();
 		data["main"]["InventoryCapacity"] = entity.InventoryCapacity.ToString();
 
 		foreach (var item in entity.Inventory)
