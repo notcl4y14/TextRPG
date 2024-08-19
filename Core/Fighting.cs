@@ -4,17 +4,18 @@ namespace Core;
 
 class Fighting
 {
-	public static List<Entity> Enemies = [];
+	public static List<Enemy> Enemies = [];
 
 	// Enemies
-	public static void AddEnemy(Entity enemy)
+	public static void AddEnemy(Enemy enemy)
 	{
+		enemy.Index = Enemies.Count + 1;
 		Enemies.Add(enemy);
 	}
 
 	public static void RemoveEnemy(int index)
 	{
-		Enemies.RemoveAt(index);
+		Enemies[index] = null;
 	}
 
 	public static void ClearEnemies()
@@ -22,7 +23,7 @@ class Fighting
 		Enemies = [];
 	}
 
-	public static Entity? GetEnemy(int index)
+	public static Enemy? GetEnemy(int index)
 	{
 		try
 		{
@@ -34,7 +35,7 @@ class Fighting
 		}
 	}
 
-	public static Entity GetEnemyNs(int index)
+	public static Enemy GetEnemyNs(int index)
 	{
 		return Enemies[index];
 	}
@@ -45,7 +46,7 @@ class Fighting
 
 		for (int i = 0; i < Enemies.Count; i++)
 		{
-			Entity enemy = Enemies[i];
+			Enemy enemy = Enemies[i];
 
 			if (enemy == null)
 			{
@@ -68,7 +69,9 @@ class Fighting
 
 	public static void CheckEnemies()
 	{
-		if (Enemies.Count == 0)
+		Enemy[] left = Enemies.FindAll(x => !x.IsDead).ToArray();
+
+		if (left.Length == 0)
 		{
 			ClearEnemies();
 			Game.EndFight();
@@ -79,26 +82,15 @@ class Fighting
 	{
 		for (int i = 0; i < Enemies.Count; i++)
 		{
-			Entity enemy = GetEnemyNs(i);
+			Enemy enemy = GetEnemyNs(i);
 
 			if (enemy.IsDead)
 			{
-				Enemies[i] = null;
+				CheckEnemies();
 				continue;
 			}
 
-			(enemy as Enemy).Move(Enemies.ToArray(), player);
-		}
-
-		for (int i = 0; i < Enemies.Count; i++)
-		{
-			Entity enemy = GetEnemyNs(i);
-			
-			if (enemy == null)
-			{
-				RemoveEnemy(i);
-				CheckEnemies();
-			}
+			enemy.Move(Enemies.ToArray(), player);
 		}
 	}
 }

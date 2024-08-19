@@ -16,7 +16,17 @@ class Enemies : Command
 		for (int i = 0; i < enemies.Length; i++)
 		{
 			Entity enemy = enemies[i];
-			Console.WriteLine($"{i}: {enemy.Id} ({enemy.Health}/{enemy.HealthMax})");
+			int index = i + 1;
+
+			if (enemy.IsDead)
+			{
+				// Console.WriteLine($"{index}: -");
+				// Console.WriteLine($"{index}: {enemy.Id} (DEAD)");
+				Console.WriteLine($"{index}: {enemy.Id} -------------------------");
+				continue;
+			}
+
+			Console.WriteLine($"{index}: {enemy.Id} ({enemy.Health}/{enemy.HealthMax})");
 		}
 	}
 }

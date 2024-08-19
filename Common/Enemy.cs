@@ -6,6 +6,7 @@ class Enemy : Entity
 {
 	public int Damage;
 	public int DamageRange;
+	public int Index;
 
 	private int GetRandomDamage()
 	{
@@ -18,8 +19,8 @@ class Enemy : Entity
 	{
 		int damage = GetRandomDamage();
 
-		Console.WriteLine(Id + " fights back!");
-		Console.WriteLine(Id + " deals " + damage + " damage!");
+		Console.WriteLine(Id + " " + Index + " fights back!");
+		Console.WriteLine(Id + " " + Index + " deals " + damage + " damage!");
 		opponent.Hurt((uint)damage);
 	}
 }

@@ -31,11 +31,17 @@ class Attack : Command
 		}
 
 		int index = Convert.ToInt32(args[0]);
-		Entity? enemy = Fighting.GetEnemy(index);
+		Entity? enemy = Fighting.GetEnemy(index - 1);
 
 		if (enemy == null)
 		{
 			Console.WriteLine($"There's no enemy at index {index}");
+			return;
+		}
+
+		if (enemy.IsDead)
+		{
+			Console.WriteLine($"{enemy.Id} {index} is already dead");
 			return;
 		}
 
