@@ -4,7 +4,7 @@ namespace Common.Items;
 
 class Weapon : Item
 {
-	public override ItemType Type { get; } = ItemType.Food;
+	public override ItemType Type { get; } = ItemType.Weapon;
 	public int Damage;
 	public int DamageRange = 5;
 	public int CritDamage;
