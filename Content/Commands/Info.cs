@@ -41,6 +41,7 @@ class Info : Command
 		}
 
 		Console.WriteLine(item.Name);
+		Console.WriteLine("\tType: " + item.Type);
 		Console.WriteLine("\tDescription: " + item.Description);
 		Console.WriteLine("\tStats:");
 		Console.WriteLine(item.GetStats("\t\t"));

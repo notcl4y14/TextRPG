@@ -9,9 +9,17 @@ enum ItemID
 	Sword
 }
 
+enum ItemType
+{
+	Null,
+	Food,
+	Weapon
+}
+
 abstract class Item
 {
 	public ItemID Id;
+	public virtual ItemType Type { get; } = ItemType.Null;
 	public int Amount = 1;
 	public string Name = "";
 	public string Description = "";
