@@ -47,7 +47,7 @@ class Weapon : Item
 			delta = GetRandomCrit();
 		}
 
-		Console.WriteLine($"{user} dealt {delta} damage with Sword!");
+		Console.WriteLine($"{user} dealt {delta} damage with {Id}!");
 		Console.Write(crit ? "That was a critical hit!\n" : "");
 
 		target.Hurt((uint)delta);
