@@ -15,11 +15,11 @@ class Enemy : Entity
 		return delta;
 	}
 
-	public void Move(Entity[] buddies, Entity opponent)
+	public virtual void Move(Entity[] buddies, Entity opponent)
 	{
 		int damage = GetRandomDamage();
 
-		Console.WriteLine(Id + " " + Index + " fights back!");
+		// Console.WriteLine(Id + " " + Index + " fights back!");
 		Console.WriteLine(Id + " " + Index + " deals " + damage + " damage!");
 		opponent.Hurt((uint)damage);
 	}

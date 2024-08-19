@@ -13,4 +13,10 @@ class Slime : Enemy
 		Damage = 2;
 		DamageRange = 1;
 	}
+	
+	public override void Move(Entity[] buddies, Entity opponent)
+	{
+		Console.WriteLine(Id + " " + Index + " flings its mass at the opponent!");
+		base.Move(buddies, opponent);
+	}
 }
