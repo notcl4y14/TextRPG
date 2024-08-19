@@ -4,6 +4,7 @@ abstract class Command
 {
 	public string Name;
 	public string[] Alias;
+	// public bool ChangesTurn;
 
 	public Command Load()
 	{

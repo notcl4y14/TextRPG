@@ -9,20 +9,21 @@ class Game
 {
 	private static Game Instance;
 	bool IsRunning;
+	GameState State;
 	Entity Controller;
-	Entity?[] Enemies;
 
 	public Game()
 	{
 		IsRunning = false;
+		State = GameState.Fighting;
 		Controller = new Player();
-		Enemies = new Entity[3];
 		Instance = this;
 	}
 
 	// Misc.
 	public static void GameOver()
 	{
+		SetState(GameState.GameOver);
 		Console.WriteLine("Game Over");
 
 		if (!SaveState.IsOnSave)
@@ -62,30 +63,54 @@ class Game
 		}
 	}
 
+	public static GameState GetState()
+	{
+		return Instance.State;
+	}
+
+	public static void SetState(GameState state)
+	{
+		Instance.State = state;
+	}
+
+	public static void StartFight()
+	{
+		SetState(GameState.Fighting);
+
+		Console.WriteLine(Fighting.PresentEncounter());
+	}
+
+	public static void EndFight()
+	{
+		SetState(GameState.Play);
+		Console.WriteLine("Victory!");
+	}
+
 	public static void Exit()
 	{
 		Environment.Exit(0);
-	}
-
-	// Enemies
-	public static void AddEnemy(Entity enemy, int index)
-	{
-		Instance.Enemies[index] = enemy;
-	}
-	public static void RemoveEnemy(int index)
-	{
-		Instance.Enemies[index] = null;
-	}
-	public static Entity? GetEnemy(int index)
-	{
-		return Instance.Enemies[index];
 	}
 
 	// Init
 	public void Load()
 	{
 		LibraryLoader.LoadCommands();
+		LibraryLoader.LoadEntities();
 		LibraryLoader.LoadItems();
+
+		// Entity slime = EntityLibrary.GetFromID(EntityID.Slime);
+
+		// if (slime == null)
+		// {
+		// 	Console.WriteLine("Content.Entities.Slime not found");
+		// 	Exit();
+		// 	return;
+		// }
+
+		Fighting.AddEnemy(new Slime());
+		Fighting.AddEnemy(new Slime());
+		Fighting.AddEnemy(new Slime());
+		StartFight();
 	}
 
 	// Main
@@ -95,7 +120,7 @@ class Game
 
 		while (IsRunning)
 		{
-			Console.Write("> ");
+			Console.Write(GetState() == GameState.Fighting ? Controller.HealthPercent + "% > " : "> ");
 			string input = Log.ReadLine();
 			CommandInput command = CommandInput.FromString(input);
 			CheckCommand(command);
@@ -119,6 +144,7 @@ class Game
 				Console.WriteLine("Stats:");
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
 				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
+				Console.WriteLine($"\tAttackSlot: {(Controller.AttackSlot != null ? Controller.AttackSlot.Id : "None")}");
 				break;
 
 			default:

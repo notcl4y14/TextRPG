@@ -14,6 +14,7 @@ class Entity
 	public int HealthMax;
 	public List<Item> Inventory = [];
 	public int InventoryCapacity;
+	public Item? AttackSlot;
 
 	// Health
 	public string HealthString
@@ -27,9 +28,19 @@ class Entity
 		get => (int)((float)Health / HealthMax * 100);
 	}
 
+	public bool IsDead
+	{
+		get => Health <= 0;
+	}
+
 	public virtual void OnDead()
 	{
-		return;
+		Console.WriteLine($"{Id} is ded");
+	}
+
+	public virtual void OnHurt(Entity sender, int damage)
+	{
+		Console.WriteLine($"{Id} loses {damage} HP! ({Health}/{HealthMax})");
 	}
 
 	public void Heal(uint delta)
@@ -46,7 +57,7 @@ class Entity
 	{
 		Health -= (int)delta;
 
-		if (Health < 0)
+		if (Health <= 0)
 		{
 			Health = 0;
 			OnDead();
@@ -58,7 +69,17 @@ class Entity
 	{
 		return Inventory.Count >= InventoryCapacity;
 	}
-	
+
+	public bool HasItem(ItemID itemID)
+	{
+		return Inventory.Find(x => x.Id == itemID) != null;
+	}
+
+	public Item? FindItem(ItemID itemID)
+	{
+		return Inventory.Find(x => x.Id == itemID);
+	}
+
 	public void AddItem(Item item, int count = 1)
 	{
 		if (Inventory.Count + 1 > InventoryCapacity)
@@ -104,9 +125,14 @@ class Entity
 		}
 		
 		Inventory.Remove(item);
+
+		if (AttackSlot?.Id == itemID)
+		{
+			AttackSlot = null;
+		}
 	}
 
-	public void Use(ItemID itemID)
+	public void Use(ItemID itemID, Entity target)
 	{
 		Item? item = Inventory.Find(x => x.Id == itemID);
 
@@ -115,6 +141,6 @@ class Entity
 			return;
 		}
 
-		item.Use(this, this);
+		item.Use(this, target);
 	}
 }
