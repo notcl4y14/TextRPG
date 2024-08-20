@@ -1,6 +1,6 @@
 using Core;
 
-namespace Content.Entities;
+namespace Common;
 
 class Enemy : Entity
 {

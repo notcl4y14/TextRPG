@@ -45,6 +45,8 @@ class LibraryLoader
 		{
 			Entity instance = Activator.CreateInstance(type) as Entity;
 
+			Console.WriteLine(instance);
+
 			if (instance == null)
 			{
 				continue;
