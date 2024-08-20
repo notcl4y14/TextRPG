@@ -1,3 +1,4 @@
+using Common;
 using Content.Entities;
 
 namespace Core;
@@ -5,6 +6,11 @@ namespace Core;
 class Fighting
 {
 	public static List<Enemy> Enemies = [];
+	public static List<int> AlreadyDeadEnemies = [];
+	public static Currency Currency = new Currency(bronze: 0, silver: 0, gold: 0);
+	// public static int Bronze = 0;
+	// public static int Silver = 0;
+	// public static int Gold = 0;
 
 	// Enemies
 	public static void AddEnemy(Enemy enemy)
@@ -18,9 +24,14 @@ class Fighting
 		Enemies[index] = null;
 	}
 
-	public static void ClearEnemies()
+	public static void Clear()
 	{
 		Enemies = [];
+		AlreadyDeadEnemies = [];
+		Currency = new Currency(bronze: 0, silver: 0, gold: 0);
+		// Bronze = 0;
+		// Silver = 0;
+		// Gold = 0;
 	}
 
 	public static Enemy? GetEnemy(int index)
@@ -73,8 +84,8 @@ class Fighting
 
 		if (left.Length == 0)
 		{
-			ClearEnemies();
 			Game.EndFight();
+			Clear();
 		}
 	}
 
@@ -84,9 +95,20 @@ class Fighting
 		{
 			Enemy enemy = GetEnemyNs(i);
 
+			if (enemy.IsDead && !AlreadyDeadEnemies.Contains(i))
+			{
+				Currency.Add(Currency, enemy.Currency);
+				// Console.WriteLine(enemy.Currency);
+				// Console.WriteLine(Currency);
+				CheckEnemies();
+			}
+
 			if (enemy.IsDead)
 			{
-				CheckEnemies();
+				// Bronze += enemy.Bronze;
+				// Silver += enemy.Silver;
+				// Gold += enemy.Gold;
+				AlreadyDeadEnemies.Add(i);
 				continue;
 			}
 

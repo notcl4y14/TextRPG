@@ -1,3 +1,5 @@
+using Common;
+
 namespace Core;
 
 enum EntityID
@@ -15,6 +17,7 @@ class Entity
 	public List<Item> Inventory = [];
 	public int InventoryCapacity;
 	public Item? AttackSlot;
+	public Currency Currency;
 
 	// Health
 	public string HealthString

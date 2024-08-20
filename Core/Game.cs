@@ -83,7 +83,12 @@ class Game
 	public static void EndFight()
 	{
 		SetState(GameState.Play);
+		// Currency currency = new Currency(Fighting.Bronze, Fighting.Silver, Fighting.Gold);
 		Console.WriteLine("Victory!");
+		Console.WriteLine(Currency.Present(Fighting.Currency));
+		Currency.Add(Instance.Controller.Currency, Fighting.Currency);
+		// Console.WriteLine(Currency.Present(currency));
+		// Currency.Add((Instance.Controller as Player).Currency, currency);
 	}
 
 	public static void Exit()
@@ -141,10 +146,13 @@ class Game
 				break;
 
 			case "stats":
+				// Player controller = Controller as Player;
 				Console.WriteLine("Stats:");
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
 				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
 				Console.WriteLine($"\tAttackSlot: {(Controller.AttackSlot != null ? Controller.AttackSlot.Id : "None")}");
+				Console.WriteLine($"\tCurrency: Bronze: {Controller.Currency.Bronze}, Silver: {Controller.Currency.Silver}, Gold: {Controller.Currency.Gold}");
+				// Console.WriteLine($"\tCurrency: Bronze: {controller.Currency.Bronze}, Silver: {controller.Currency.Silver}, Gold: {controller.Currency.Gold}");
 				break;
 
 			default:
