@@ -30,7 +30,18 @@ class Attack : Command
 			return;
 		}
 
-		int index = Convert.ToInt32(args[0]);
+		int index;
+
+		try
+		{
+			index = Convert.ToInt32(args[0]);
+		}
+		catch
+		{
+			Console.WriteLine("Invalid input");
+			return;
+		}
+		
 		Entity? enemy = Fighting.GetEnemy(index - 1);
 
 		if (enemy == null)
