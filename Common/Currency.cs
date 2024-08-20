@@ -13,24 +13,33 @@ class Currency
 		Gold = gold;
 	}
 
-    public override string ToString()
-    {
-        return $"Currency (Bronze: {Bronze}, Silver: {Silver}, Gold: {Gold})";
-    }
+	public int GetSummary () => Bronze + Silver * 100 + Gold * 100 * 100;
 
-    public static void ConvertMoney(Currency currency)
+    public override string ToString() => $"Currency (Bronze: {Bronze}, Silver: {Silver}, Gold: {Gold})";
+
+    public void ConvertMoney()
 	{
-		if (currency.Bronze >= 100)
+		if (this.Bronze < 0)
 		{
-			int part = (int)(currency.Bronze / 100);
-			currency.Bronze -= part * 100;
-			currency.Silver += part;
+			this.Bronze = 100 - (this.Bronze * -1);
+			this.Silver -= (this.Bronze / 100) + 1;
 		}
-		if (currency.Silver >= 100)
+		if (this.Silver < 0)
 		{
-			int part = (int)(currency.Silver / 100);
-			currency.Silver -= part * 100;
-			currency.Gold += part;
+			this.Silver = 100 - (this.Silver * -1);
+			this.Gold -= (this.Silver / 100) + 1;
+		}
+
+		// https://stackoverflow.com/a/28008021/22146374
+		if (this.Bronze >= 100)
+		{
+			this.Silver += (this.Bronze / 100);
+			this.Bronze = this.Bronze % 100;
+		}
+		if (this.Silver >= 100)
+		{
+			this.Gold += (this.Silver / 100);
+			this.Silver = this.Silver % 100;
 		}
 	}
 
@@ -41,34 +50,41 @@ class Currency
 		destCurrency.Gold += srcCurrency.Gold;
 	}
 
-	public static string Present(Currency currency)
+	public static void Subtract(Currency destCurrency, Currency srcCurrency)
+	{
+		destCurrency.Bronze -= srcCurrency.Bronze;
+		destCurrency.Silver -= srcCurrency.Silver;
+		destCurrency.Gold -= srcCurrency.Gold;
+	}
+
+	public string Present()
 	{
 		string result = "";
-		bool bronze = currency.Bronze > 0;
-		bool silver = currency.Silver > 0;
-		bool gold = currency.Gold > 0;
+		bool bronze = this.Bronze > 0;
+		bool silver = this.Silver > 0;
+		bool gold = this.Gold > 0;
 
 		if (bronze)
 		{
-			result += $"Bronze: {currency.Bronze}";
+			result += $"Bronze: {this.Bronze}";
 		}
 		
 		if (bronze && silver)
 		{
-			result += $", Silver: {currency.Silver}";
+			result += $", Silver: {this.Silver}";
 		}
 		else if (silver)
 		{
-			result += $"Silver: {currency.Silver}";
+			result += $"Silver: {this.Silver}";
 		}
 
 		if (silver && gold)
 		{
-			result += $", Gold: {currency.Gold}";
+			result += $", Gold: {this.Gold}";
 		}
 		else if (gold)
 		{
-			result += $"Gold: {currency.Gold}";
+			result += $"Gold: {this.Gold}";
 		}
 
 		return result;
