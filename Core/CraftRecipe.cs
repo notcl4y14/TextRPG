@@ -6,10 +6,12 @@ class CraftRecipe
 {
 	public Dictionary<ItemID, int> Ingredients;
 	public ItemID ItemID;
+	public int Amount;
 
 	public CraftRecipe()
 	{
 		Ingredients = [];
+		Amount = 1;
 	}
 
 	private bool InventoryHasItem(List<Item> inventory, ItemID itemID, int amount)

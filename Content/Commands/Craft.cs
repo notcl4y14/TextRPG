@@ -22,7 +22,14 @@ class Craft : Command
 				continue;
 			}
 
-			Console.Write(_recipe.Key + " (");
+			Console.Write(_recipe.Key);
+
+			if (recipe.Amount > 1)
+			{
+				Console.Write(" x" + recipe.Amount);
+			}
+			
+			Console.Write(" (");
 
 			// List all the ingredients
 			foreach (var item in recipe.Ingredients)
@@ -79,7 +86,7 @@ class Craft : Command
 			return;
 		}
 
-		entity.AddItem( ItemLibrary.GetFromID(recipe.ItemID) );
+		entity.AddItem( ItemLibrary.GetFromID(recipe.ItemID), recipe.Amount );
 
 		// Remove Items from the inventory
 		foreach (var item in entity.Inventory)
