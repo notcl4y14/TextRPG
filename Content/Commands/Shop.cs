@@ -8,7 +8,7 @@ class Shop : Command
 	public Shop()
 	{
 		Name = "shop";
-		Alias = [];
+		Alias = ["buy"];
 	}
 
 	public override void Run(string[] args, ref Entity user)
@@ -37,6 +37,26 @@ class Shop : Command
 			Console.WriteLine($"You don't see {itemID}");
 			return;
 		}
+
+		// int amount;
+		// string input_amount = Log.AskInput("Amount (Leave blank for 1): ");
+
+		// try
+		// {
+		// 	if (input_amount == "")
+		// 	{
+		// 		amount = 1;
+		// 	}
+		// 	else
+		// 	{
+		// 		amount = Convert.ToInt32(input_amount);
+		// 	}
+		// }
+		// catch
+		// {
+		// 	Console.WriteLine("Invalid input");
+		// 	return;
+		// }
 
 		Item? item = Common.Shop.BuyItem(itemID, ref user.Currency);
 

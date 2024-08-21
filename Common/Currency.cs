@@ -57,6 +57,21 @@ class Currency
 		destCurrency.Gold -= srcCurrency.Gold;
 	}
 
+	public static void Multiply(Currency destCurrency, Currency srcCurrency)
+	{
+		destCurrency.Bronze *= srcCurrency.Bronze;
+		destCurrency.Silver *= srcCurrency.Silver;
+		destCurrency.Gold *= srcCurrency.Gold;
+	}
+	public static Currency Multiplied(Currency srcCurrency, int mul)
+	{
+		Currency destCurrency = new Currency(srcCurrency.Bronze, srcCurrency.Silver, srcCurrency.Gold);
+		destCurrency.Bronze *= mul;
+		destCurrency.Silver *= mul;
+		destCurrency.Gold *= mul;
+		return destCurrency;
+	}
+
 	public string Present()
 	{
 		string result = "";
