@@ -7,7 +7,8 @@ enum ItemID
 	Null,
 	Apple,
 	Sword,
-	Boulder
+	Boulder,
+	Rock
 }
 
 enum ItemType
