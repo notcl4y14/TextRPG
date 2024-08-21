@@ -96,18 +96,14 @@ class Fighting
 
 			if (enemy.IsDead && !AlreadyDeadEnemies.Contains(i))
 			{
+				AlreadyDeadEnemies.Add(i);
 				Currency.Add(Currency, enemy.Currency);
-				// Console.WriteLine(enemy.Currency);
-				// Console.WriteLine(Currency);
 				CheckEnemies();
+				continue;
 			}
 
 			if (enemy.IsDead)
 			{
-				// Bronze += enemy.Bronze;
-				// Silver += enemy.Silver;
-				// Gold += enemy.Gold;
-				AlreadyDeadEnemies.Add(i);
 				continue;
 			}
 

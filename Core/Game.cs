@@ -15,7 +15,7 @@ class Game
 	public Game()
 	{
 		IsRunning = false;
-		State = GameState.Fighting;
+		State = GameState.Play;
 		Controller = new Player();
 		Instance = this;
 	}
@@ -86,6 +86,7 @@ class Game
 		Console.WriteLine("Victory!");
 		Console.WriteLine(Fighting.Currency.Present());
 		Currency.Add(Instance.Controller.Currency, Fighting.Currency);
+		Instance.Controller.Currency.ConvertMoney();
 	}
 
 	public static void Exit()
@@ -104,10 +105,10 @@ class Game
 		Common.Shop.AddItem(ItemID.Boulder, new Currency(bronze: 50));
 		Common.Shop.AddItem(ItemID.Apple, new Currency(silver: 1));
 
-		Fighting.AddEnemy(new Slime());
-		Fighting.AddEnemy(new Slime());
-		Fighting.AddEnemy(new Slime());
-		StartFight();
+		// Fighting.AddEnemy(new Slime());
+		// Fighting.AddEnemy(new Slime());
+		// Fighting.AddEnemy(new Slime());
+		// StartFight();
 	}
 
 	// Main
