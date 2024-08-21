@@ -104,11 +104,6 @@ class Game
 		Common.Shop.AddItem(ItemID.Sword, new Currency(silver: 10));
 		Common.Shop.AddItem(ItemID.Boulder, new Currency(bronze: 50));
 		Common.Shop.AddItem(ItemID.Apple, new Currency(silver: 1));
-
-		// Fighting.AddEnemy(new Slime());
-		// Fighting.AddEnemy(new Slime());
-		// Fighting.AddEnemy(new Slime());
-		// StartFight();
 	}
 
 	// Main
@@ -118,7 +113,7 @@ class Game
 
 		while (IsRunning)
 		{
-			Console.Write(GetState() == GameState.Fighting ? Controller.HealthPercent + "% > " : "> ");
+			Console.Write(Controller.HealthString + " > ");
 			string input = Log.ReadLine();
 			CommandInput command = CommandInput.FromString(input);
 			CheckCommand(command);
