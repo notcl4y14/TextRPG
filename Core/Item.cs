@@ -7,6 +7,7 @@ enum ItemID
 	Null,
 	Apple,
 	Sword,
+	BoneSword,
 	Boulder,
 	Rock
 }

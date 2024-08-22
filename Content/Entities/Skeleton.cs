@@ -14,6 +14,7 @@ class Skeleton : Enemy
 		Damage = 15;
 		DamageRange = 5;
 		Cash = new Currency(silver: 25);
+		Items.Add(ItemID.BoneSword, 8);
 	}
 
 	public override void Move(Entity[] buddies, Entity opponent)
