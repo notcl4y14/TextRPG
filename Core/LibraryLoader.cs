@@ -53,6 +53,11 @@ class LibraryLoader
 
 			// instance.Load();
 
+			if (instance is Enemy)
+			{
+				EnemyLibrary.Register(instance.Id, (Enemy)instance);
+			}
+
 			EntityLibrary.Register(instance.Id, instance);
 		}
 	}

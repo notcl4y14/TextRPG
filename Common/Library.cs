@@ -20,6 +20,17 @@ class CraftLibrary : Library<ItemID, CraftRecipe>
 
 class EntityLibrary : Library<EntityID, Entity>;
 
+class EnemyLibrary : Library<EntityID, Enemy>
+{
+	public static Enemy GetRandom()
+	{
+		Random random = new Random();
+		int index = random.Next(Registers.Count);
+		Enemy enemy = Registers.ElementAt(index).Value;
+		return enemy;
+	}
+}
+
 class CommandLibrary : Library<string, Command>
 {
 	public static Dictionary<string, string[]> Alias = [];
