@@ -63,6 +63,7 @@ class Currency
 		destCurrency.Silver *= srcCurrency.Silver;
 		destCurrency.Gold *= srcCurrency.Gold;
 	}
+	
 	public static Currency Multiplied(Currency srcCurrency, int mul)
 	{
 		Currency destCurrency = new Currency(srcCurrency.Bronze, srcCurrency.Silver, srcCurrency.Gold);
@@ -93,7 +94,7 @@ class Currency
 			result += $"Silver: {this.Silver}";
 		}
 
-		if (silver && gold)
+		if ((bronze && gold) || (silver && gold))
 		{
 			result += $", Gold: {this.Gold}";
 		}

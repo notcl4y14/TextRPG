@@ -13,7 +13,7 @@ class Slime : Enemy
 		InventoryCapacity = 5;
 		Damage = 2;
 		DamageRange = 1;
-		Currency = new Currency(silver: 10);
+		Cash = new Currency(silver: 10);
 	}
 	
 	public override void Move(Entity[] buddies, Entity opponent)

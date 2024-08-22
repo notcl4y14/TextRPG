@@ -97,7 +97,7 @@ class Fighting
 			if (enemy.IsDead && !AlreadyDeadEnemies.Contains(i))
 			{
 				AlreadyDeadEnemies.Add(i);
-				Currency.Add(Currency, enemy.Currency);
+				Currency.Add(Currency, enemy.Cash);
 				CheckEnemies();
 				continue;
 			}

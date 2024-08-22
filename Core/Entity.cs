@@ -16,8 +16,14 @@ class Entity
 	public int HealthMax;
 	public List<Item> Inventory = [];
 	public int InventoryCapacity;
+	public Currency Cash;
 	public Item? AttackSlot;
-	public Currency Currency;
+
+	// Attack Slot
+	public string AttackSlotString => AttackSlot != null ? AttackSlot.Id.ToString() : "None";
+
+	// Cash
+	public string CashString => Cash.Present();
 
 	// Health
 	public string HealthString
@@ -68,6 +74,8 @@ class Entity
 	}
 
 	// Inventory
+	public string InventoryString => Inventory.Count + "/" + InventoryCapacity;
+	
 	public bool IsInventoryFull()
 	{
 		return Inventory.Count >= InventoryCapacity;

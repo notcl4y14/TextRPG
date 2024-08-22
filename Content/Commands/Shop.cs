@@ -58,7 +58,7 @@ class Shop : Command
 		// 	return;
 		// }
 
-		Item? item = Common.Shop.BuyItem(itemID, ref user.Currency);
+		Item? item = Common.Shop.BuyItem(itemID, ref user.Cash);
 
 		if (item == null)
 		{

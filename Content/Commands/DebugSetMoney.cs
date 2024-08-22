@@ -15,15 +15,15 @@ class DebugSetMoney : Command
 		switch (type)
 		{
 			case "bronze":
-				user.Currency.Bronze = amount;
+				user.Cash.Bronze = amount;
 				Console.WriteLine($"Successfully set Bronze to {amount}!");
 				break;
 			case "silver":
-				user.Currency.Silver = amount;
+				user.Cash.Silver = amount;
 				Console.WriteLine($"Successfully set Silver to {amount}!");
 				break;
 			case "gold":
-				user.Currency.Gold = amount;
+				user.Cash.Gold = amount;
 				Console.WriteLine($"Successfully set Gold to {amount}!");
 				break;
 			default:
@@ -34,9 +34,9 @@ class DebugSetMoney : Command
 
 	private void SetAllAmount(ref Entity user, int bronze, int silver, int gold)
 	{
-		user.Currency.Bronze = bronze;
-		user.Currency.Silver = silver;
-		user.Currency.Gold = gold;
+		user.Cash.Bronze = bronze;
+		user.Cash.Silver = silver;
+		user.Cash.Gold = gold;
 		Console.WriteLine("Successfully set new values!");
 	}
 

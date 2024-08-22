@@ -85,8 +85,8 @@ class Game
 		SetState(GameState.Play);
 		Console.WriteLine("Victory!");
 		Console.WriteLine(Fighting.Currency.Present());
-		Currency.Add(Instance.Controller.Currency, Fighting.Currency);
-		Instance.Controller.Currency.ConvertMoney();
+		Currency.Add(Instance.Controller.Cash, Fighting.Currency);
+		Instance.Controller.Cash.ConvertMoney();
 	}
 
 	public static void Exit()
@@ -120,9 +120,9 @@ class Game
 		}
 	}
 
-	public void CheckCommand(CommandInput command)
+	public void CheckCommand(CommandInput commandInput)
 	{
-		switch (command.Name.ToLower())
+		switch (commandInput.Name.ToLower())
 		{
 			case "exit":
 			case "quit":
@@ -136,15 +136,23 @@ class Game
 			case "stats":
 				Console.WriteLine("Stats:");
 				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
-				Console.WriteLine($"\tInventory: {Controller.Inventory.Count}/{Controller.InventoryCapacity}");
-				Console.WriteLine($"\tAttackSlot: {(Controller.AttackSlot != null ? Controller.AttackSlot.Id : "None")}");
-				Console.WriteLine($"\tCurrency: Bronze: {Controller.Currency.Bronze}, Silver: {Controller.Currency.Silver}, Gold: {Controller.Currency.Gold}");
+				Console.WriteLine($"\tInventory: {Controller.InventoryString}");
+				Console.WriteLine($"\tCash: {Controller.CashString}");
+				Console.WriteLine($"\tWeapon Slot: {Controller.AttackSlotString}");
 				break;
 
 			default:
-				string name = command.Name.ToLower();
-				string[] args = command.Arguments.ToArray();
-				CommandLibrary.GetFromID(name)?.Run(args, ref Controller);
+				string name = commandInput.Name.ToLower();
+				string[] args = commandInput.Arguments.ToArray();
+				Command command = CommandLibrary.GetFromID(name);
+
+				if (command == null)
+				{
+					Console.WriteLine($"Unknown command {name}");
+					break;
+				}
+
+				command.Run(args, ref Controller);
 				break;
 		}
 	}

@@ -58,7 +58,7 @@ class Attack : Command
 
 		if (user.AttackSlot == null)
 		{
-			Console.WriteLine("AttackSlot is empty");
+			Console.WriteLine("Weapon Slot is empty");
 			return;
 		}
 
