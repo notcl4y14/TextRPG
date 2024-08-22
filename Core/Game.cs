@@ -2,6 +2,7 @@ using Common;
 using Content.Commands;
 using Content.Entities;
 using Content.Items;
+using Core.Cli;
 
 namespace Core;
 

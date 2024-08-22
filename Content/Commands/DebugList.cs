@@ -1,5 +1,6 @@
 using Common;
 using Core;
+using Core.Cli;
 
 namespace Content.Commands;
 

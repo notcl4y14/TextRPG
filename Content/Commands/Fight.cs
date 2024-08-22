@@ -1,5 +1,6 @@
 using Content.Entities;
 using Core;
+using Core.Cli;
 
 namespace Content.Commands;
 
