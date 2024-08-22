@@ -7,6 +7,7 @@ class Fighting
 	public static List<Enemy> Enemies = [];
 	public static List<int> AlreadyDeadEnemies = [];
 	public static Currency Currency = new Currency(bronze: 0, silver: 0, gold: 0);
+	public static List<Item> Items = [];
 
 	// Enemies
 	public static void AddEnemy(Enemy enemy)
@@ -25,6 +26,7 @@ class Fighting
 		Enemies = [];
 		AlreadyDeadEnemies = [];
 		Currency = new Currency(bronze: 0, silver: 0, gold: 0);
+		Items = [];
 	}
 
 	public static Enemy? GetEnemy(int index)
@@ -90,8 +92,21 @@ class Fighting
 
 			if (enemy.IsDead && !AlreadyDeadEnemies.Contains(i))
 			{
-				AlreadyDeadEnemies.Add(i);
 				Currency.Add(Currency, enemy.Cash);
+
+				Random random = new Random();
+
+				foreach (var entry in enemy.Items)
+				{
+					int value = random.Next(entry.Value);
+
+					if (value == 1)
+					{
+						Items.Add(ItemLibrary.GetFromID(entry.Key));
+					}
+				}
+				
+				AlreadyDeadEnemies.Add(i);
 				CheckEnemies();
 				continue;
 			}

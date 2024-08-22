@@ -7,6 +7,8 @@ class Enemy : Entity
 	public int Index;
 	public int Damage;
 	public int DamageRange;
+	public Dictionary<ItemID, int> Items = [];
+	
 	private int GetRandomDamage()
 	{
 		Random random = new Random();

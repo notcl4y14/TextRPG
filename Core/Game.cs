@@ -84,8 +84,15 @@ class Game
 	public static void EndFight()
 	{
 		SetState(GameState.Play);
-		Console.WriteLine("Victory!");
+		Console.WriteLine("\nVictory!\n");
 		Console.WriteLine(Fighting.Currency.Present());
+
+		foreach (var item in Fighting.Items)
+		{
+			Instance.Controller.AddItem(item);
+			Console.WriteLine("You got " + item.Id + "!");
+		}
+		
 		Currency.Add(Instance.Controller.Cash, Fighting.Currency);
 		Instance.Controller.Cash.ConvertMoney();
 	}
