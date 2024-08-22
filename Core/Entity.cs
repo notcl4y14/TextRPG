@@ -6,7 +6,8 @@ enum EntityID
 {
 	Null,
 	Player,
-	Slime
+	Slime,
+	Skeleton
 }
 
 class Entity
