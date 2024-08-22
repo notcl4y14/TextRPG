@@ -7,9 +7,6 @@ class Fighting
 	public static List<Enemy> Enemies = [];
 	public static List<int> AlreadyDeadEnemies = [];
 	public static Currency Currency = new Currency(bronze: 0, silver: 0, gold: 0);
-	// public static int Bronze = 0;
-	// public static int Silver = 0;
-	// public static int Gold = 0;
 
 	// Enemies
 	public static void AddEnemy(Enemy enemy)
@@ -28,9 +25,6 @@ class Fighting
 		Enemies = [];
 		AlreadyDeadEnemies = [];
 		Currency = new Currency(bronze: 0, silver: 0, gold: 0);
-		// Bronze = 0;
-		// Silver = 0;
-		// Gold = 0;
 	}
 
 	public static Enemy? GetEnemy(int index)
