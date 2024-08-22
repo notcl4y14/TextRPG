@@ -1,6 +1,6 @@
-using Common;
+using Core;
 
-namespace Core;
+namespace Common;
 
 class Fighting
 {

@@ -1,4 +1,6 @@
-namespace Core;
+using Core;
+
+namespace Common;
 
 class Log
 {

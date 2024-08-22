@@ -1,9 +1,9 @@
-using Common;
 using Content.Entities;
+using Core;
 using IniParser;
 using IniParser.Model;
 
-namespace Core;
+namespace Common;
 
 class SaveState
 {
