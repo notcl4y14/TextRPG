@@ -31,7 +31,7 @@ class Equip : Command
 
 			if (itemID == ItemID.Null)
 			{
-				Console.WriteLine($"There's no {itemID}");
+				Console.WriteLine($"There's no {args[0]}");
 				return;
 			}
 
@@ -61,7 +61,7 @@ class Equip : Command
 
 			if (itemID == ItemID.Null)
 			{
-				Console.WriteLine($"There's no {itemID}");
+				Console.WriteLine($"There's no {args[1]}");
 				return;
 			}
 
