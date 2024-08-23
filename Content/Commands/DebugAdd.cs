@@ -20,7 +20,7 @@ class DebugAdd : Command
 
 		if (args.Length == 0)
 		{
-			string input = Log.AskInput("ItemID: ");
+			string input = TrpgConsole.AskInput("ItemID: ");
 			itemName = input;
 
 			itemID = Item.GetIDFromString(input);

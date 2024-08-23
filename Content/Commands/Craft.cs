@@ -58,7 +58,7 @@ class Craft : Command
 		ListItemRecipes(entity);
 
 		// Choose Item
-		string itemName = Log.AskInput("ItemID: ");
+		string itemName = TrpgConsole.AskInput("ItemID: ");
 		ItemID itemID = Item.GetIDFromString(itemName);
 
 		if (itemID == ItemID.Null)

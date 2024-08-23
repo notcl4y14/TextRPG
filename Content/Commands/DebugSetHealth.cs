@@ -24,7 +24,7 @@ class DebugSetHealth : Command
 		else
 		{
 			Console.WriteLine($"Current Health: {entity.Health}/{entity.HealthMax}");
-			health = Convert.ToInt32(Log.AskInput("Health: "));
+			health = Convert.ToInt32(TrpgConsole.AskInput("Health: "));
 		}
 		
 		entity.Health = health;

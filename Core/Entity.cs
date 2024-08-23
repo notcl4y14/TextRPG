@@ -21,7 +21,7 @@ class Entity
 	public Item? AttackSlot;
 
 	// Attack Slot
-	public string AttackSlotString => AttackSlot != null ? AttackSlot.Id.ToString() : "None";
+	public string AttackSlotString => AttackSlot != null ? AttackSlot.Id.ToString() : "[ItemsNone]None[/]";
 
 	// Cash
 	public string CashString => Cash.Present();

@@ -21,10 +21,10 @@ class Shop : Command
 			ItemID entryItem = entry.Key;
 			Currency price = entry.Value;
 
-			Console.WriteLine($"- {entryItem}: {price.Present()}");
+			TrpgConsole.MarkupLine($"- {entryItem}: {price.Present()}");
 		}
 
-		string input_itemID = Log.AskInput("Choose Item: ");
+		string input_itemID = TrpgConsole.AskInput("Choose Item: ");
 		ItemID itemID = Item.GetIDFromString(input_itemID);
 
 		if (itemID == ItemID.Null)
@@ -68,6 +68,6 @@ class Shop : Command
 		}
 		
 		user.AddItem(item);
-		Console.WriteLine($"Bought {itemID} for {Common.Shop.Items[itemID].Present()}!");
+		TrpgConsole.MarkupLine($"Bought {itemID} for {Common.Shop.Items[itemID].Present()}!");
 	}
 }

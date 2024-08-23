@@ -3,6 +3,7 @@ using Content.Commands;
 using Content.Entities;
 using Content.Items;
 using Core.Cli;
+using Spectre.Console;
 
 namespace Core;
 
@@ -29,11 +30,11 @@ class Game
 
 		if (!SaveState.IsOnSave)
 		{
-			bool chooseSave = Log.AskConfirm("Choose another save? (Y/n)\n");
+			bool chooseSave = TrpgConsole.AskConfirm("Choose another save? (Y/n)\n");
 
 			if (chooseSave)
 			{
-				string fileName = Log.AskInput("Filename: ");
+				string fileName = TrpgConsole.AskInput("Filename: ");
 				Instance.Controller = SaveState.Load(fileName);
 			}
 			else
@@ -48,11 +49,11 @@ class Game
 		
 		Console.WriteLine("Continue from last save? (Y/n)");
 		Console.WriteLine($"\n\tHealth: {entity.Health}/{entity.HealthMax}");
-		Log.Inventory(Instance.Controller.Inventory, Instance.Controller.InventoryCapacity, "\t");
+		TrpgConsole.Inventory(Instance.Controller.Inventory, Instance.Controller.InventoryCapacity, "\t");
 
 		Console.WriteLine("\nNOTE: If you choose \"n\", the game will quit");
 
-		bool continueSave = Log.AskConfirm("Continue from last save? (Y/n)\n");
+		bool continueSave = TrpgConsole.AskConfirm("Continue from last save? (Y/n)\n");
 
 		if (continueSave)
 		{
@@ -85,7 +86,7 @@ class Game
 	{
 		SetState(GameState.Play);
 		Console.WriteLine("\nVictory!\n");
-		Console.WriteLine(Fighting.Currency.Present());
+		TrpgConsole.MarkupLine(Fighting.Currency.Present());
 
 		foreach (var item in Fighting.Items)
 		{
@@ -122,8 +123,10 @@ class Game
 
 		while (IsRunning)
 		{
-			Console.Write(Controller.HealthString + " > ");
-			string input = Log.ReadLine();
+			string healthColor = Colors.GetHealthColor(Controller.Health, Controller.HealthMax);
+			TrpgConsole.Markup($"[{healthColor}]{Controller.HealthString}[/] > ");
+
+			string input = TrpgConsole.ReadLine();
 			CommandInput command = CommandInput.FromString(input);
 			CheckCommand(command);
 		}
@@ -143,11 +146,12 @@ class Game
 				break;
 
 			case "stats":
-				Console.WriteLine("Stats:");
-				Console.WriteLine($"\tHealth: {Controller.HealthString} : {Controller.HealthPercent}%");
-				Console.WriteLine($"\tInventory: {Controller.InventoryString}");
-				Console.WriteLine($"\tCash: {Controller.CashString}");
-				Console.WriteLine($"\tWeapon Slot: {Controller.AttackSlotString}");
+				string healthColor = Colors.GetHealthColor(Controller.Health, Controller.HealthMax);
+				TrpgConsole.WriteLine("Stats:");
+				TrpgConsole.MarkupLine($"\tHealth: [{healthColor}]{Controller.HealthString}[/] : [{healthColor}]{Controller.HealthPercent}%[/]");
+				TrpgConsole.WriteLine($"\tInventory: {Controller.InventoryString}");
+				TrpgConsole.MarkupLine($"\tCash: {Controller.CashString}");
+				TrpgConsole.MarkupLine($"\tWeapon Slot: {Controller.AttackSlotString}");
 				break;
 
 			default:

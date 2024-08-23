@@ -28,7 +28,7 @@ class Use : Command
 				Console.WriteLine($"\t- {_item.Id}{(_item.Amount > 1 ? " " + _item.AmountString : "")}");
 			}
 
-			string input = Log.AskInput("ItemID: ");
+			string input = TrpgConsole.AskInput("ItemID: ");
 			itemName = input;
 
 			itemID = Item.GetIDFromString(input);

@@ -1,3 +1,5 @@
+using Spectre.Console;
+
 namespace Common;
 
 class Currency
@@ -80,27 +82,29 @@ class Currency
 		bool silver = this.Silver > 0;
 		bool gold = this.Gold > 0;
 
+		// AnsiConsole.MarkupLine(Colors.ToAnsiString("[CurrencyBronze]BRONZE[/]"));
+
 		if (bronze)
 		{
-			result += $"Bronze: {this.Bronze}";
+			result += $"Bronze: [CurrencyBronze]{this.Bronze}[/]";
 		}
 		
 		if (bronze && silver)
 		{
-			result += $", Silver: {this.Silver}";
+			result += $", Silver: [CurrencySilver]{this.Silver}[/]";
 		}
 		else if (silver)
 		{
-			result += $"Silver: {this.Silver}";
+			result += $"Silver: [CurrencySilver]{this.Silver}[/]";
 		}
 
 		if ((bronze && gold) || (silver && gold))
 		{
-			result += $", Gold: {this.Gold}";
+			result += $", Gold: [CurrencyGold]{this.Gold}[/]";
 		}
 		else if (gold)
 		{
-			result += $"Gold: {this.Gold}";
+			result += $"Gold: [CurrencyGold]{this.Gold}[/]";
 		}
 
 		return result;

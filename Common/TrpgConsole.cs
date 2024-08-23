@@ -1,18 +1,29 @@
 using Core;
+using Spectre.Console;
 
 namespace Common;
 
-class Log
+class TrpgConsole
 {
 	// Output
-	public static void Error(string v)
+	public static void Write(string v)
 	{
-		Console.WriteLine("Error: " + v);
+		Console.Write(v);
 	}
 
-	public static void Error(string v, string prefix)
+	public static void WriteLine(string v)
 	{
-		Console.WriteLine(prefix + v);
+		Console.WriteLine(v);
+	}
+
+	public static void Markup(string v)
+	{
+		AnsiConsole.Markup(Colors.ToAnsiString(v));
+	}
+
+	public static void MarkupLine(string v)
+	{
+		AnsiConsole.MarkupLine(Colors.ToAnsiString(v));
 	}
 
 	// Input

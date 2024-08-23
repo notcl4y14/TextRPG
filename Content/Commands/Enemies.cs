@@ -24,11 +24,12 @@ class Enemies : Command
 			{
 				// Console.WriteLine($"{index}: -");
 				// Console.WriteLine($"{index}: {enemy.Id} (DEAD)");
-				Console.WriteLine($"{index}: {enemy.Id} -------------------------");
+				TrpgConsole.MarkupLine($"[ItemsNone]{index}: {enemy.Id} -------------------------[/]");
 				continue;
 			}
 
-			Console.WriteLine($"{index}: {enemy.Id} ({enemy.Health}/{enemy.HealthMax})");
+			string healthColor = Colors.GetHealthColor(enemy.Health, enemy.HealthMax);
+			TrpgConsole.MarkupLine($"{index}: {enemy.Id} ([{healthColor}]{enemy.Health}/{enemy.HealthMax}[/])");
 		}
 	}
 }
