@@ -22,7 +22,7 @@ class Fight : Command
 		}
 		
 		Random random = new Random();
-		int enemyAmount = random.Next(4);
+		int enemyAmount = random.Next(1, 4);
 
 		for (int i = 0; i < enemyAmount; i++)
 		{
