@@ -7,6 +7,8 @@ enum ItemID
 	Null,
 	Apple,
 	Milk,
+	Pie,
+	PieSlice,
 	Sword,
 	BoneSword,
 	Boulder,

@@ -112,6 +112,7 @@ class Game
 		Common.Shop.AddItem(ItemID.Sword, new Currency(silver: 10));
 		Common.Shop.AddItem(ItemID.Boulder, new Currency(bronze: 50));
 		Common.Shop.AddItem(ItemID.Apple, new Currency(silver: 1));
+		Common.Shop.AddItem(ItemID.Pie, new Currency(silver: 75));
 	}
 
 	// Main
