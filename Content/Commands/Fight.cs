@@ -13,20 +13,6 @@ class Fight : Command
 		Alias = ["encounter"];
 	}
 
-	// private Enemy GetRandomEnemy()
-	// {
-	// 	// Random random = new Random();
-	// 	// Enemy enemy = EnemyLibrary.GetFromID(entityID);
-
-	// 	// TODO: Make an EnemyLibrary
-	// 	// if (!(enemy is Enemy))
-	// 	// {
-	// 	// 	return GetRandomEnemy();
-	// 	// }
-
-	// 	// return enemy;
-	// }
-
 	public override void Run(string[] args, ref Entity user)
 	{
 		if (Game.GetState() == GameState.Fighting)
@@ -36,12 +22,12 @@ class Fight : Command
 		}
 		
 		Random random = new Random();
-		int enemyAmount = random.Next(1, 4);
+		int enemyAmount = random.Next(4);
 
 		for (int i = 0; i < enemyAmount; i++)
 		{
-			Enemy _enemy = EnemyLibrary.GetRandom();
-			Type enemyType = _enemy.GetType();
+			Enemy srcEnemy = EnemyLibrary.GetRandom();
+			Type enemyType = srcEnemy.GetType();
 			Enemy enemy = (Enemy)Activator.CreateInstance(enemyType);
 			Fighting.AddEnemy(enemy);
 		}

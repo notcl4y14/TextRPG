@@ -26,43 +26,52 @@ class Game
 	public static void GameOver()
 	{
 		SetState(GameState.GameOver);
-		Console.WriteLine("Game Over");
+		TrpgConsole.WriteLine("Game Over");
 
-		if (!SaveState.IsOnSave)
+		bool quit = SaveState.IsOnSave
+			? GameOver_SaveState()
+			: GameOver_NoSaveState();
+		
+		if (quit)
 		{
-			bool chooseSave = TrpgConsole.AskConfirm("Choose another save? (Y/n)\n");
+			Exit();
+		}
+	}
 
-			if (chooseSave)
-			{
-				string fileName = TrpgConsole.AskInput("Filename: ");
-				Instance.Controller = SaveState.Load(fileName);
-			}
-			else
-			{
-				Exit();
-			}
+	public static bool GameOver_NoSaveState()
+	{
+		bool chooseSave = TrpgConsole.AskConfirm("Choose another save? (Y/n)\n");
 
-			return;
+		if (chooseSave)
+		{
+			string fileName = TrpgConsole.AskInput("Filename: ");
+			Instance.Controller = SaveState.Load(fileName);
+
+			return false;
 		}
 
+		return true;
+	}
+
+	public static bool GameOver_SaveState()
+	{
 		Entity entity = SaveState.Load(SaveState.FileName);
-		
-		Console.WriteLine("Continue from last save? (Y/n)");
-		Console.WriteLine($"\n\tHealth: {entity.Health}/{entity.HealthMax}");
+
+		TrpgConsole.WriteLine("Continue from last save? (Y/n)");
+		TrpgConsole.WriteLine($"\n\tHealth: {entity.Health}/{entity.HealthMax}");
 		TrpgConsole.Inventory(Instance.Controller.Inventory, Instance.Controller.InventoryCapacity, "\t");
 
-		Console.WriteLine("\nNOTE: If you choose \"n\", the game will quit");
+		TrpgConsole.WriteLine("\nNOTE: If you choose \"n\", the game will quit");
 
 		bool continueSave = TrpgConsole.AskConfirm("Continue from last save? (Y/n)\n");
 
 		if (continueSave)
 		{
 			Instance.Controller = SaveState.Load(SaveState.FileName);
+			return false;
 		}
-		else
-		{
-			Exit();
-		}
+
+		return true;
 	}
 
 	public static GameState GetState()
@@ -77,21 +86,21 @@ class Game
 
 	public static void StartFight()
 	{
+		TrpgConsole.WriteLine(Fighting.PresentEncounter());
 		SetState(GameState.Fighting);
-
-		Console.WriteLine(Fighting.PresentEncounter());
 	}
 
 	public static void EndFight()
 	{
-		SetState(GameState.Play);
-		Console.WriteLine("\nVictory!\n");
+		TrpgConsole.WriteLine("\n==== Victory! ====\n");
 		TrpgConsole.MarkupLine(Fighting.Currency.Present());
+
+		SetState(GameState.Play);
 
 		foreach (var item in Fighting.Items)
 		{
 			Instance.Controller.AddItem(item);
-			Console.WriteLine("You got " + item.Id + "!");
+			TrpgConsole.WriteLine($"You got {item.Id}!");
 		}
 		
 		Currency.Add(Instance.Controller.Cash, Fighting.Currency);

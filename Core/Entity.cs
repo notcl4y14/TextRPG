@@ -15,13 +15,14 @@ class Entity
 	public EntityID Id;
 	public int Health;
 	public int HealthMax;
-	public List<Item> Inventory = [];
-	public int InventoryCapacity;
 	public Currency Cash;
+	public int InventoryCapacity;
+	public List<Item> Inventory = [];
 	public Item? AttackSlot;
 
 	// Attack Slot
-	public string AttackSlotString => AttackSlot != null ? AttackSlot.Id.ToString() : "[ItemsNone]None[/]";
+	public string AttackSlotString => AttackSlot != null
+		? AttackSlot.Id.ToString() : "[ItemsNone]None[/]";
 
 	// Cash
 	public string CashString => Cash.Present();
