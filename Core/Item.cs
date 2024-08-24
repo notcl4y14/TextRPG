@@ -51,6 +51,11 @@ abstract class Item
 
 	// Misc.
 	public abstract void Use(Entity user, Entity target);
+	
+	public virtual void Eat(Entity user, Entity target)
+	{
+		Console.WriteLine($"{Id} doesn't look so edible");
+	}
 
 	public void RemoveOne()
 	{
