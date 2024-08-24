@@ -12,14 +12,16 @@ enum ItemID
 	Sword,
 	BoneSword,
 	Boulder,
-	Rock
+	Rock,
+	IronArmor
 }
 
 enum ItemType
 {
 	Null,
 	Food,
-	Weapon
+	Weapon,
+	Armor
 }
 
 abstract class Item

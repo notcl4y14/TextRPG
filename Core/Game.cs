@@ -160,7 +160,9 @@ class Game
 				TrpgConsole.MarkupLine($"\tHealth: [{healthColor}]{Controller.HealthString}[/] : [{healthColor}]{Controller.HealthPercent}%[/]");
 				TrpgConsole.WriteLine($"\tInventory: {Controller.InventoryString}");
 				TrpgConsole.MarkupLine($"\tCash: {Controller.CashString}");
+				TrpgConsole.WriteLine($"\tDefense: {Controller.Defense}");
 				TrpgConsole.MarkupLine($"\tWeapon Slot: {Controller.AttackSlotString}");
+				TrpgConsole.MarkupLine($"\tArmor Slot: {Controller.ArmorSlotString}");
 				break;
 
 			default:

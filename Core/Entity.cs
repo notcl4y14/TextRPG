@@ -1,4 +1,5 @@
 using Common;
+using Common.Items;
 
 namespace Core;
 
@@ -19,10 +20,20 @@ class Entity
 	public int InventoryCapacity;
 	public List<Item> Inventory = [];
 	public Item? AttackSlot;
+	public Armor? ArmorSlot;
 
 	// Attack Slot
 	public string AttackSlotString => AttackSlot != null
 		? AttackSlot.Id.ToString() : "[ItemsNone]None[/]";
+
+	// Armor Slot
+	public string ArmorSlotString => ArmorSlot != null
+		? ArmorSlot.Id.ToString() : "[ItemsNone]None[/]";
+	
+	public int Defense
+	{
+		get => ArmorSlot != null ? ArmorSlot.Defense : 0;
+	}
 
 	// Cash
 	public string CashString => Cash.Present();
@@ -66,7 +77,10 @@ class Entity
 
 	public void Hurt(uint delta)
 	{
-		Health -= (int)delta;
+		int damage = (int)delta - Defense;
+		damage = damage < 0 ? 1 : damage;
+		
+		Health -= damage;
 
 		if (Health <= 0)
 		{

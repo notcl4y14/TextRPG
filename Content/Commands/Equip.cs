@@ -1,3 +1,4 @@
+using Common.Items;
 using Core;
 using Core.Cli;
 
@@ -17,7 +18,7 @@ class Equip : Command
 		{
 			Console.WriteLine("equip [slotName] [itemID]");
 			Console.WriteLine("equip [itemID]");
-			Console.WriteLine("Slot Names: attack|weapon");
+			Console.WriteLine("Slot Names: attack|weapon, armor");
 			return;
 		}
 
@@ -47,6 +48,9 @@ class Equip : Command
 			{
 				case ItemType.Weapon:
 					slotName = "weapon";
+					break;
+				case ItemType.Armor:
+					slotName = "armor";
 					break;
 
 				default:
@@ -79,6 +83,15 @@ class Equip : Command
 			case "attack":
 			case "weapon":
 				user.AttackSlot = item;
+				break;
+			case "armor":
+				if (!(item is Armor))
+				{
+					Console.WriteLine($"{itemID} is not armor!");
+					break;
+				}
+
+				user.ArmorSlot = (Armor)item;
 				break;
 
 			default:
