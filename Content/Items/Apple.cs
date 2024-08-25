@@ -13,7 +13,13 @@ class Apple : Food
 		HealPower = 10;
 	}
 
-	public override void LoadRecipe()
+    // public override void Eat(Entity user, Entity target)
+    // {
+    //     target.Heal((uint)HealPower);
+	// 	user.RemoveItem(Id);
+    // }
+
+    public override void LoadRecipe()
 	{
 		var recipe = new CraftRecipe();
 		recipe.ItemID = Id;
