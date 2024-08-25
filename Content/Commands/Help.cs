@@ -18,6 +18,7 @@ class Help : Command
 		"\tinventory|invent|inv - Outputs list of player's items",
 		"\tequip                - Equips a given item to one of the slots",
 		"\tuse                  - Interacts with the item from the inventory",
+		"\teat                  - Eats the item, as long as it's edible",
 		"\tcraft                - Outputs available items to craft and asks which one to make",
 		"",
 		"\tinfo                 - Outputs item's information",
