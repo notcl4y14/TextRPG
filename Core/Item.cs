@@ -13,6 +13,7 @@ enum ItemID
 	BoneSword,
 	Boulder,
 	Rock,
+	BronzeArmor,
 	IronArmor
 }
 
