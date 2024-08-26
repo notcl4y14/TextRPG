@@ -6,6 +6,7 @@ class Food : Item
 {
 	public override ItemType Type { get; } = ItemType.Food;
 	public int HealPower;
+	public ItemID Dispense = ItemID.Null;
 
 	public override void LoadStats()
 	{
@@ -21,6 +22,11 @@ class Food : Item
 	{
 		target.Heal((uint)HealPower);
 		user.RemoveItem(Id);
+
+		if (Dispense != ItemID.Null)
+		{
+			user.AddItem(ItemLibrary.GetFromID(Dispense));
+		}
 
 		Console.WriteLine("Yum!");
 		Console.WriteLine($"Got {HealPower} HP!");
