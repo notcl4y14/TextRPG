@@ -33,16 +33,19 @@ class Craft : Command
 			Console.Write(" (");
 
 			// List all the ingredients
-			foreach (var item in recipe.Ingredients)
+			for (int i = 0; i < recipe.Ingredients.Count; i++)
 			{
-				Console.Write(item.Key);
+				ItemID item = recipe.Ingredients.Keys.ElementAt(i);
+				int amount = recipe.Ingredients.Values.ElementAt(i);
 
-				if (item.Value > 1)
+				Console.Write(item);
+
+				if (amount > 1)
 				{
-					Console.Write(" x" + item.Value);
+					Console.Write(" x" + amount);
 				}
 
-				if (item.Value != recipe.Ingredients.Last().Value)
+				if (i != recipe.Ingredients.Count - 1)
 				{
 					Console.Write(", ");
 				}
@@ -90,24 +93,19 @@ class Craft : Command
 		entity.AddItem( ItemLibrary.GetFromID(recipe.ItemID), recipe.Amount );
 
 		// Remove Items from the inventory
+		List<ItemID> list = [];
+
 		foreach (var item in entity.Inventory)
 		{
 			if (recipe.Ingredients.ContainsKey(item.Id))
 			{
-				// if (item.Amount < recipe.Items[item.Id])
-				// {
-				// 	break;
-				// }
-
-				item.Amount -= recipe.Ingredients[item.Id];
-
-				if (item.Amount < 1)
-				{
-					entity.RemoveWholeItem(item.Id);
-				}
-
-				break;
+				list.Add(item.Id);
 			}
+		}
+
+		foreach (var itemId in list)
+		{
+			entity.RemoveItem(itemId, recipe.Ingredients[itemId]);
 		}
 	}
 }
