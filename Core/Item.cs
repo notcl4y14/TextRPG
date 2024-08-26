@@ -9,12 +9,17 @@ enum ItemID
 	Milk,
 	Pie,
 	PieSlice,
+	Water,
+	WaterBottle,
+	HealthPotion,
 	Sword,
 	BoneSword,
 	Boulder,
 	Rock,
 	BronzeArmor,
-	IronArmor
+	IronArmor,
+	EmptyBottle,
+	Grass
 }
 
 enum ItemType
