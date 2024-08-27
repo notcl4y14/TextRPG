@@ -125,6 +125,7 @@ class Game
 		Common.Shop.AddItem(ItemID.Pie, new Currency(silver: 75));
 		Common.Shop.AddItem(ItemID.BronzeArmor, new Currency(bronze: 10));
 		Common.Shop.AddItem(ItemID.IronArmor, new Currency(silver: 50));
+		Common.Shop.AddItem(ItemID.EmptyBottle, new Currency(bronze: 10));
 	}
 
 	// Main
