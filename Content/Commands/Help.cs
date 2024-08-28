@@ -23,6 +23,7 @@ class Help : Command
 		"",
 		"\tinfo                 - Outputs item's information",
 		"\tshop|buy             - Outputs items in the shop and YOU CHOOSE AN ITEM",
+		"\tpickup               - Gives a random item",
 		"",
 		"\tfight|encounter      - Starts a fight",
 		"\tenemies              - Outputs list of enemies you're currently fighting",
