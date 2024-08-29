@@ -14,6 +14,7 @@ enum ItemID
 	HealthPotion,
 	Sword,
 	BoneSword,
+	Wand,
 	Boulder,
 	Rock,
 	BronzeArmor,
