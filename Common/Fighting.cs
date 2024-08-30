@@ -86,6 +86,11 @@ class Fighting
 
 	public static void MoveEnemies(Entity player)
 	{
+		foreach (var buff in player.Buffs)
+		{
+			buff.Step(player);
+		}
+
 		for (int i = 0; i < Enemies.Count; i++)
 		{
 			Enemy enemy = GetEnemyNs(i);
@@ -118,5 +123,15 @@ class Fighting
 
 			enemy.Move(Enemies.ToArray(), player);
 		}
+
+		foreach (var buff in player.Buffs)
+		{
+			if (buff.Moves < 1)
+			{
+				buff.OnFinish(player);
+			}
+		}
+
+		player.Buffs = player.Buffs.FindAll(buff => buff.Moves > 0);
 	}
 }

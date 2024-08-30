@@ -21,6 +21,9 @@ class Entity
 	public Item? AttackSlot;
 	public Armor? ArmorSlot;
 
+	public List<Buff> Buffs = [];
+	public int AddDefense = 0;
+
 	// ---- Slots ----
 	public string AttackSlotString => AttackSlot != null
 		? AttackSlot.Id.ToString() : "[ItemsNone]None[/]";
@@ -30,7 +33,7 @@ class Entity
 	
 	public int Defense
 	{
-		get => ArmorSlot != null ? ArmorSlot.Defense : 0;
+		get => (ArmorSlot != null ? ArmorSlot.Defense : 0) + AddDefense;
 	}
 
 	// ---- Cash ----
