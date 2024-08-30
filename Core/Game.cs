@@ -59,7 +59,7 @@ class Game
 
 		TrpgConsole.WriteLine("Continue from last save? (Y/n)");
 		TrpgConsole.WriteLine($"\n\tHealth: {entity.Health}/{entity.HealthMax}");
-		TrpgConsole.Inventory(Instance.Controller.Inventory, Instance.Controller.InventoryCapacity, "\t");
+		TrpgConsole.Inventory(Instance.Controller.Inventory, "\t");
 
 		TrpgConsole.WriteLine("\nNOTE: If you choose \"n\", the game will quit");
 
@@ -162,7 +162,7 @@ class Game
 				string healthColor = Colors.GetHealthColor(Controller.Health, Controller.HealthMax);
 				TrpgConsole.WriteLine("Stats:");
 				TrpgConsole.MarkupLine($"\tHealth: [{healthColor}]{Controller.HealthString}[/] : [{healthColor}]{Controller.HealthPercent}%[/]");
-				TrpgConsole.WriteLine($"\tInventory: {Controller.InventoryString}");
+				TrpgConsole.WriteLine($"\tInventory: {Controller.InvCapacityString}");
 				TrpgConsole.MarkupLine($"\tCash: {Controller.CashString}");
 				TrpgConsole.WriteLine($"\tDefense: {Controller.Defense}");
 				TrpgConsole.MarkupLine($"\tWeapon Slot: {Controller.AttackSlotString}");

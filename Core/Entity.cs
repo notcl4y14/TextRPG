@@ -17,16 +17,14 @@ class Entity
 	public int Health;
 	public int HealthMax;
 	public Currency Cash;
-	public int InventoryCapacity;
-	public List<Item> Inventory = [];
+	public Inventory Inventory;
 	public Item? AttackSlot;
 	public Armor? ArmorSlot;
 
-	// Attack Slot
+	// ---- Slots ----
 	public string AttackSlotString => AttackSlot != null
 		? AttackSlot.Id.ToString() : "[ItemsNone]None[/]";
-
-	// Armor Slot
+	
 	public string ArmorSlotString => ArmorSlot != null
 		? ArmorSlot.Id.ToString() : "[ItemsNone]None[/]";
 	
@@ -35,10 +33,10 @@ class Entity
 		get => ArmorSlot != null ? ArmorSlot.Defense : 0;
 	}
 
-	// Cash
+	// ---- Cash ----
 	public string CashString => Cash.Present();
 
-	// Health
+	// ---- Health ----
 	public string HealthString
 	{
 		get => $"{Health}/{HealthMax}";
@@ -89,79 +87,22 @@ class Entity
 		}
 	}
 
-	// Inventory
-	public string InventoryString => Inventory.Count + "/" + InventoryCapacity;
-	
-	public bool IsInventoryFull()
-	{
-		return Inventory.Count >= InventoryCapacity;
-	}
+	// ---- Inventory ----
+	public string InvCapacityString => Inventory.Items.Count + "/" + Inventory.Capacity;
 
-	public bool HasItem(ItemID itemID)
-	{
-		return Inventory.Find(x => x.Id == itemID) != null;
-	}
+	public bool IsInvFull { get => Inventory.IsFull; }
 
-	public Item? FindItem(ItemID itemID)
-	{
-		return Inventory.Find(x => x.Id == itemID);
-	}
+	public Item FindItem(ItemID itemID) => Inventory.FindItem(itemID);
 
-	public void AddItem(Item item, int count = 1)
-	{
-		if (Inventory.Count + 1 > InventoryCapacity)
-		{
-			return;
-		}
+	public bool HasItem(ItemID itemID) => Inventory.HasItem(itemID);
 
-		Item? destItem = Inventory.Find(x => x.Id == item.Id);
-		if (destItem != null)
-		{
-			destItem.Amount += count;
-			return;
-		}
+	public bool AddItem(Item item, int count = 1) => Inventory.AddItem(item, count);
 
-		item.Amount = count;
-		Inventory.Add(item);
-	}
-
-	public void RemoveItem(ItemID itemID, int count = 1)
-	{
-		Item? item = Inventory.Find(x => x.Id == itemID);
-		
-		if (item == null)
-		{
-			return;
-		}
-		
-		item.Amount -= count;
-
-		if (item.Amount < 1)
-		{
-			Inventory.Remove(item);
-		}
-	}
-
-	public void RemoveWholeItem(ItemID itemID)
-	{
-		Item? item = Inventory.Find(x => x.Id == itemID);
-
-		if (item == null)
-		{
-			return;
-		}
-		
-		Inventory.Remove(item);
-
-		if (AttackSlot?.Id == itemID)
-		{
-			AttackSlot = null;
-		}
-	}
+	public void RemoveItem(ItemID itemID, int count = 1) => Inventory.RemoveItem(itemID, count);
 
 	public void Use(ItemID itemID, Entity target)
 	{
-		Item? item = Inventory.Find(x => x.Id == itemID);
+		Item? item = Inventory.FindItem(itemID);
 
 		if (item == null)
 		{

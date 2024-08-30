@@ -41,7 +41,7 @@ class DebugAdd : Command
 			return;
 		}
 
-		if (entity.IsInventoryFull())
+		if (entity.IsInvFull)
 		{
 			Console.WriteLine("Inventory is full!");
 			return;

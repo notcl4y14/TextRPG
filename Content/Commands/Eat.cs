@@ -23,7 +23,7 @@ class Eat : Command
 			// Show Inventory
 			Console.WriteLine($"You have:");
 
-			foreach (var _item in entity.Inventory)
+			foreach (var _item in entity.Inventory.Items)
 			{
 				Console.WriteLine($"\t- {_item.Id}{(_item.Amount > 1 ? " " + _item.AmountString : "")}");
 			}
@@ -32,14 +32,14 @@ class Eat : Command
 			itemName = input;
 
 			itemID = Item.GetIDFromString(input);
-			item = entity.Inventory.Find(x => x.Id == itemID);
+			item = entity.FindItem(itemID);
 		}
 		else
 		{
 			string input_itemID = arguments[0];
 			itemName = input_itemID;
 			itemID = Item.GetIDFromString(input_itemID);
-			item = entity.Inventory.Find(x => x.Id == itemID);
+			item = entity.FindItem(itemID);
 		}
 
 		if (itemID == ItemID.Null)

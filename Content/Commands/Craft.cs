@@ -18,7 +18,7 @@ class Craft : Command
 		{
 			var recipe = _recipe.Value;
 
-			if (!recipe.CheckIngredients(entity.Inventory))
+			if (!recipe.CheckIngredients(entity.Inventory.Items))
 			{
 				continue;
 			}
@@ -78,13 +78,13 @@ class Craft : Command
 			return;
 		}
 
-		if (!recipe.CheckIngredients(entity.Inventory))
+		if (!recipe.CheckIngredients(entity.Inventory.Items))
 		{
 			Console.WriteLine($"You don't have enough resources to craft {itemID}");
 			return;
 		}
 
-		if (entity.IsInventoryFull())
+		if (entity.IsInvFull)
 		{
 			Console.WriteLine($"You don't have enough space in your inventory!");
 			return;
@@ -95,7 +95,7 @@ class Craft : Command
 		// Remove Items from the inventory
 		List<ItemID> list = [];
 
-		foreach (var item in entity.Inventory)
+		foreach (var item in entity.Inventory.Items)
 		{
 			if (recipe.Ingredients.ContainsKey(item.Id))
 			{

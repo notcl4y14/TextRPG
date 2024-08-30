@@ -10,7 +10,7 @@ class Slime : Enemy
 		Id = EntityID.Slime;
 		Health = 10;
 		HealthMax = 10;
-		InventoryCapacity = 5;
+		Inventory = new Common.Inventory(5);
 		Damage = 2;
 		DamageRange = 1;
 		Cash = new Currency(silver: 10);

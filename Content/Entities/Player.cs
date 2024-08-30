@@ -11,7 +11,7 @@ class Player : Entity
 		Id = EntityID.Player;
 		Health = 125;
 		HealthMax = 125;
-		InventoryCapacity = 25;
+		Inventory = new Common.Inventory(25);
 		Cash = new Currency(bronze: 0, silver: 0, gold: 0);
 	}
 

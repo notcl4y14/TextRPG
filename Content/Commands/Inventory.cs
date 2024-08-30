@@ -14,6 +14,6 @@ class Inventory : Command
 
 	public override void Run(string[] arguments, ref Entity entity)
 	{
-		TrpgConsole.Inventory(entity.Inventory, entity.InventoryCapacity);
+		TrpgConsole.Inventory(entity.Inventory);
 	}
 }

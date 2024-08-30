@@ -10,7 +10,7 @@ class Skeleton : Enemy
 		Id = EntityID.Skeleton;
 		Health = 75;
 		HealthMax = 75;
-		InventoryCapacity = 75;
+		Inventory = new Common.Inventory(75);
 		Damage = 15;
 		DamageRange = 5;
 		Cash = new Currency(silver: 25);

@@ -52,22 +52,30 @@ class TrpgConsole
 	}
 
 	// Misc.
-	public static void Inventory(List<Item> invArray, int invCapacity)
+	public static void Inventory(Inventory inventory)
 	{
-		Console.WriteLine($"Inventory [{invArray.Count}/{invCapacity}]:");
+		int capacity = inventory.Capacity;
+		List<Item> items = inventory.Items;
+		Console.WriteLine($"Inventory [{items.Count}/{capacity}]:");
 
-		foreach (var item in invArray)
+		foreach (var item in items)
 		{
-			Console.WriteLine($"\t- {item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
+			string itemID = item.Id.ToString();
+			string itemAmount = item.Amount > 1 ? " " + item.AmountString : "";
+			Console.WriteLine($"\t- {item.Id}{itemAmount} {item.Description}");
 		}
 	}
-	public static void Inventory(List<Item> invArray, int invCapacity, string prefix)
+	public static void Inventory(Inventory inventory, string prefix)
 	{
-		Console.WriteLine($"{prefix}Inventory [{invArray.Count}/{invCapacity}]:");
+		int capacity = inventory.Capacity;
+		List<Item> items = inventory.Items;
+		Console.WriteLine($"Inventory [{items.Count}/{capacity}]:");
 
-		foreach (var item in invArray)
+		foreach (var item in items)
 		{
-			Console.WriteLine($"{prefix}\t- {item.Id}{(item.Amount > 1 ? " " + item.AmountString : "")} {item.Description}");
+			string itemID = item.Id.ToString();
+			string itemAmount = item.Amount > 1 ? " " + item.AmountString : "";
+			Console.WriteLine($"{prefix}- {item.Id}{itemAmount} {item.Description}");
 		}
 	}
 }

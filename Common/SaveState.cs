@@ -62,8 +62,7 @@ class SaveState
         {
             Health = health,
             HealthMax = healthMax,
-            InventoryCapacity = invCapacity,
-            Inventory = inventory,
+            Inventory = new Inventory(inventory, invCapacity),
 			AttackSlot = attackSlot
         };
 
@@ -82,9 +81,9 @@ class SaveState
 		data["main"]["Health"]            = entity.Health.ToString();
 		data["main"]["HealthMax"]         = entity.HealthMax.ToString();
 		data["main"]["AttackSlot"]        = entity.AttackSlot.Id.ToString();
-		data["main"]["InventoryCapacity"] = entity.InventoryCapacity.ToString();
+		data["main"]["InventoryCapacity"] = entity.Inventory.Capacity.ToString();
 
-		foreach (var item in entity.Inventory)
+		foreach (var item in entity.Inventory.Items)
 		{
 			data["inventory"][item.Id.ToString()] = item.Amount.ToString();
 		}
