@@ -8,7 +8,8 @@ enum EntityID
 	Null,
 	Player,
 	Slime,
-	Skeleton
+	Skeleton,
+	FireElemental
 }
 
 class Entity
