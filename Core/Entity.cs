@@ -114,4 +114,20 @@ class Entity
 
 		item.Use(this, target);
 	}
+
+	// ---- Buffs ----
+	public bool HasBuff(BuffID buffID)
+	{
+		return Buffs.Find(buff => buff.Id == buffID) != null;
+	}
+
+	public void AddBuff(Buff buff)
+	{
+		if (HasBuff(buff.Id))
+		{
+			return;
+		}
+
+		Buffs.Add(buff);
+	}
 }

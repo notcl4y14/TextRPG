@@ -121,6 +121,19 @@ class Fighting
 				continue;
 			}
 
+			// Apply buffs
+			enemy.Buffs.ForEach(buff => buff.Step(enemy));
+
+			foreach (var buff in enemy.Buffs)
+			{
+				if (buff.Moves < 1)
+				{
+					buff.OnFinish(enemy);
+				}
+			}
+
+			enemy.Buffs = enemy.Buffs.FindAll(buff => buff.Moves > 0);
+
 			enemy.Move(Enemies.ToArray(), player);
 		}
 

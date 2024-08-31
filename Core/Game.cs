@@ -137,7 +137,15 @@ class Game
 		while (IsRunning)
 		{
 			string healthColor = Colors.GetHealthColor(Controller.Health, Controller.HealthMax);
-			TrpgConsole.Markup($"[{healthColor}]{Controller.HealthString}[/] > ");
+			string health = $"[{healthColor}]{Controller.HealthString}[/]";
+			string buffs = "";
+
+			foreach (var buff in Controller.Buffs)
+			{
+				buffs += buff.Icon;
+			}
+			
+			TrpgConsole.Markup($"{health} {buffs}> ");
 
 			string input = TrpgConsole.ReadLine();
 			CommandInput command = CommandInput.FromString(input);

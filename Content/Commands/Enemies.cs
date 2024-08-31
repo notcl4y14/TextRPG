@@ -29,7 +29,14 @@ class Enemies : Command
 			}
 
 			string healthColor = Colors.GetHealthColor(enemy.Health, enemy.HealthMax);
-			TrpgConsole.MarkupLine($"{index}: {enemy.Id} ([{healthColor}]{enemy.Health}/{enemy.HealthMax}[/])");
+			string buffs = "";
+
+			foreach (var buff in enemy.Buffs)
+			{
+				buffs += buff.Icon;
+			}
+
+			TrpgConsole.MarkupLine($"{index}: {enemy.Id} ([{healthColor}]{enemy.Health}/{enemy.HealthMax}[/]) ({buffs})");
 		}
 	}
 }
