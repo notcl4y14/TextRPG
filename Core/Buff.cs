@@ -3,7 +3,8 @@ namespace Core;
 enum BuffID
 {
 	Null,
-	Defense
+	Defense,
+	Burn
 }
 
 class Buff

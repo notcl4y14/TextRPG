@@ -15,12 +15,14 @@ enum ItemID
 	Sword,
 	BoneSword,
 	Wand,
+	FireWand,
 	Boulder,
 	Rock,
 	BronzeArmor,
 	IronArmor,
 	EmptyBottle,
-	Grass
+	Grass,
+	Fire
 }
 
 enum ItemType
