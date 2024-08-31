@@ -57,16 +57,14 @@ abstract class Item
 	public virtual void LoadStats() {}
 
 	// Misc.
-	public abstract void Use(Entity user, Entity target);
+	public virtual void Use(Entity user, Entity target)
+	{
+		Console.WriteLine($"{Id} doesn't look like so usable");
+	}
 	
 	public virtual void Eat(Entity user, Entity target)
 	{
 		Console.WriteLine($"{Id} doesn't look so edible");
-	}
-
-	public void RemoveOne()
-	{
-		Amount--;
 	}
 
 	public string GetStats(string prefix = "")

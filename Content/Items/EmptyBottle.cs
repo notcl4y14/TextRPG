@@ -11,9 +11,4 @@ class EmptyBottle : Item
 		Name = "EmptyBottle";
 		Description = "bottle.";
 	}
-
-    public override void Use(Entity user, Entity target)
-    {
-        TrpgConsole.MarkupLine("You don't think there's much use for bottle outside of [bold]crafting[/]");
-    }
 }
