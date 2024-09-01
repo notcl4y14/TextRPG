@@ -23,6 +23,7 @@ class Entity
 	public Armor? ArmorSlot;
 
 	public List<Buff> Buffs = [];
+	public List<BuffID> ImmuneBuffs = [];
 	public int AddDefense = 0;
 
 	// ---- Slots ----
@@ -125,6 +126,10 @@ class Entity
 	public void AddBuff(Buff buff)
 	{
 		if (HasBuff(buff.Id))
+		{
+			return;
+		}
+		if (ImmuneBuffs.Contains(buff.Id))
 		{
 			return;
 		}
