@@ -15,6 +15,7 @@ class FireElemental : Enemy
 		Damage = 4;
 		DamageRange = 2;
 		Cash = new Currency(gold: 1);
+		ImmuneBuffs.Add(BuffID.Burn);
 		// TODO: Add the ability to add multiple same items
 		// And the ability to set the amount of items
 		Items.Add(ItemID.Fire, 2);
