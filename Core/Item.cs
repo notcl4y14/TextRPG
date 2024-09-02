@@ -12,6 +12,7 @@ enum ItemID
 	Water,
 	WaterBottle,
 	HealthPotion,
+	RegenPotion,
 	Sword,
 	BoneSword,
 	Wand,

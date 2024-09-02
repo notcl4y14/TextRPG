@@ -4,7 +4,8 @@ enum BuffID
 {
 	Null,
 	Defense,
-	Burn
+	Burn,
+	Regeneration
 }
 
 class Buff
