@@ -175,6 +175,8 @@ class Game
 				TrpgConsole.WriteLine($"\tDefense: {Controller.Defense}");
 				TrpgConsole.MarkupLine($"\tWeapon Slot: {Controller.AttackSlotString}");
 				TrpgConsole.MarkupLine($"\tArmor Slot: {Controller.ArmorSlotString}");
+				TrpgConsole.WriteLine($"\tBuffs:");
+				TrpgConsole.Buffs(Controller.Buffs, "\t\t");
 				break;
 
 			default:
