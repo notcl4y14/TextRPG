@@ -78,4 +78,15 @@ class TrpgConsole
 			Console.WriteLine($"{prefix}- {item.Id}{itemAmount} {item.Description}");
 		}
 	}
+
+	public static void Buffs(List<Buff> buffs, string prefix)
+	{
+		foreach (var buff in buffs)
+		{
+			string buffID = buff.Id.ToString();
+			string buffIcon = buff.Icon;
+			string buffMoves = buff.Moves.ToString();
+			TrpgConsole.MarkupLine($"{prefix}- {buffIcon} {buffID} {buffMoves}");
+		}
+	}
 }
