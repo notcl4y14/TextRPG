@@ -64,7 +64,7 @@ class Attack : Command
 			return;
 		}
 
-		user.Use(user.AttackSlot.Id, enemy);
+		user.Attack(enemy, user.AttackSlot, 0); // In case if AddDamage is greater than 0
 		Fighting.MoveEnemies(user);
 	}
 }

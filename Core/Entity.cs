@@ -25,6 +25,7 @@ class Entity
 	public List<Buff> Buffs = [];
 	public List<BuffID> ImmuneBuffs = [];
 	public int AddDefense = 0;
+	public int AddDamage = 0;
 
 	// ---- Slots ----
 	public string AttackSlotString => AttackSlot != null
@@ -90,6 +91,17 @@ class Entity
 			Health = 0;
 			OnDead();
 		}
+	}
+
+	// ---- Opponent ----
+	public void Attack(Entity target, int damage)
+	{
+		target.Hurt((uint)(damage + AddDamage));
+	}
+	public void Attack(Entity target, Item weapon, int damage)
+	{
+		weapon.Use(this, target);
+		target.Hurt((uint)(damage + AddDamage));
 	}
 
 	// ---- Inventory ----

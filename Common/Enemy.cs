@@ -22,6 +22,6 @@ class Enemy : Entity
 
 		// Console.WriteLine(Id + " " + Index + " fights back!");
 		Console.WriteLine(Id + " " + Index + " deals " + damage + " damage!");
-		opponent.Hurt((uint)damage);
+		Attack(opponent, damage);
 	}
 }
