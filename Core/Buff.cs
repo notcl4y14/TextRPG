@@ -5,7 +5,8 @@ enum BuffID
 	Null,
 	Defense,
 	Burn,
-	Regeneration
+	Regeneration,
+	Power
 }
 
 class Buff
