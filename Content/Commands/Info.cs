@@ -41,10 +41,16 @@ class Info : Command
 			return;
 		}
 
-		Console.WriteLine(item.Name);
-		Console.WriteLine("\tType: " + item.Type);
-		Console.WriteLine("\tDescription: " + item.Description);
-		Console.WriteLine("\tStats:");
-		Console.WriteLine(item.GetStats("\t\t"));
+		var description = item.Description == ""
+			? "[ItemsNone]No Description[/]"
+			: item.Description;
+
+		TrpgConsole.WriteLine(item.Name);
+		TrpgConsole.WriteLine("\tType: " + item.Type);
+		TrpgConsole.WriteLine("\tDescription: " + description);
+
+		var stats = item.GetStats("\t\t- ");
+		TrpgConsole.Write("\tStats:");
+		TrpgConsole.MarkupLine(stats == "" ? " [ItemsNone]No Stats[/]" : "\n" + stats);
 	}
 }

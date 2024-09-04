@@ -175,8 +175,18 @@ class Game
 				TrpgConsole.WriteLine($"\tDefense: {Controller.Defense}");
 				TrpgConsole.MarkupLine($"\tWeapon Slot: {Controller.AttackSlotString}");
 				TrpgConsole.MarkupLine($"\tArmor Slot: {Controller.ArmorSlotString}");
-				TrpgConsole.WriteLine($"\tBuffs:");
-				TrpgConsole.Buffs(Controller.Buffs, "\t\t");
+
+				var hasBuffs = Controller.Buffs.Count > 0;
+				TrpgConsole.Write($"\tBuffs:");
+				if (hasBuffs)
+				{
+					TrpgConsole.Write("\n");
+					TrpgConsole.Buffs(Controller.Buffs, "\t\t");
+				}
+				else
+				{
+					TrpgConsole.MarkupLine(" [ItemsNone]No buffs[/]");
+				}
 				break;
 
 			default:
