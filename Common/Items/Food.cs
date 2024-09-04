@@ -10,7 +10,7 @@ class Food : Item
 
 	public override void LoadStats()
 	{
-		Stats.Add("Heals", "" + HealPower);
+		Stats.Add("Recovers", "" + HealPower);
 	}
 
 	public override void Use(Entity user, Entity target)
