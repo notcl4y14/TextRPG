@@ -31,13 +31,14 @@ enum ItemType
 	Null,
 	Food,
 	Weapon,
-	Armor
+	Armor,
+	Misc
 }
 
 abstract class Item
 {
 	public ItemID Id;
-	public virtual ItemType Type { get; } = ItemType.Null;
+	public virtual ItemType Type { get; } = ItemType.Misc;
 	public int Amount = 1;
 	public string Name = "";
 	public string Description = "";
