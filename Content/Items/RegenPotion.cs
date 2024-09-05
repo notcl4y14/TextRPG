@@ -36,8 +36,7 @@ class RegenPotion : Item
 	{
 		var recipe = new CraftRecipe();
 		recipe.ItemID = Id;
-		recipe.AddItem(ItemID.EmptyBottle, 1);
-		recipe.AddItem(ItemID.Water, 1);
+		recipe.AddItem(ItemID.WaterBottle, 1);
 		recipe.AddItem(ItemID.Apple, 1);
 		recipe.Register();
 	}
