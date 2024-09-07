@@ -40,7 +40,8 @@ class Entity
 	}
 
 	// ---- Cash ----
-	public string CashString => Cash.Present();
+	public string CashString => Cash.GetSummary() != 0
+		? Cash.Present() : "[ItemsNone]None[/]";
 
 	// ---- Health ----
 	public string HealthString
