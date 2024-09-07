@@ -55,6 +55,7 @@ class SaveState
 		int health           = Convert.ToInt32(data["main"]["Health"]);
 		int healthMax        = Convert.ToInt32(data["main"]["HealthMax"]);
 		Item? attackSlot     = ParseItem(data["main"]["AttackSlot"]);
+		Item? armorSlot      = ParseItem(data["main"]["ArmorSlot"]);
 		int invCapacity      = Convert.ToInt32(data["main"]["InventoryCapacity"]);
 		List<Item> inventory = ParseInventory(data["inventory"]);
 
@@ -80,7 +81,8 @@ class SaveState
 		data["main"]["Name"]              = name;
 		data["main"]["Health"]            = entity.Health.ToString();
 		data["main"]["HealthMax"]         = entity.HealthMax.ToString();
-		data["main"]["AttackSlot"]        = entity.AttackSlot.Id.ToString();
+		data["main"]["AttackSlot"]        = entity.AttackSlot?.Id.ToString();
+		data["main"]["ArmorSlot"]         = entity.ArmorSlot?.Id.ToString();
 		data["main"]["InventoryCapacity"] = entity.Inventory.Capacity.ToString();
 
 		foreach (var item in entity.Inventory.Items)
