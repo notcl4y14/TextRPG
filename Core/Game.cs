@@ -26,7 +26,7 @@ class Game
 	public static void GameOver()
 	{
 		SetState(GameState.GameOver);
-		TrpgConsole.WriteLine("Game Over");
+		TrpgConsole.WriteLine("==== Game Over ====");
 
 		bool quit = SaveState.IsOnSave
 			? GameOver_SaveState()
