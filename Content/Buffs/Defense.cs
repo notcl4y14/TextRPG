@@ -11,6 +11,7 @@ class Defense : Buff
 	{
 		Id = BuffID.Defense;
 		DefenseValue = defense;
+		Icon = "[rgb(223,230,242)]P[/]";
 	}
 
 	public override void Step(Entity user)

@@ -16,6 +16,7 @@ enum ItemID
 	HealthPotion,
 	RegenPotion,
 	PowerPotion,
+	DefensePotion,
 
 	Sword,
 	BoneSword,
