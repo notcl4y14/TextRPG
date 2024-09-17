@@ -28,6 +28,7 @@ class Help : Command
 		"\tfight|encounter      - Starts a fight",
 		"\tenemies              - Outputs list of enemies you're currently fighting",
 		"\tattack               - Attacks the given enemy (The weapon should be equipped)",
+		"\tdefense              - Defends and decreases given to you attack damage",
 		"",
 		"\tload - Loads save state",
 		"\tsave - Saves current state"
